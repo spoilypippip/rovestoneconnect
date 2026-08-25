@@ -1,0 +1,19 @@
+node_modules
+.next
+out
+build
+*.log
+.env*.local
+.DS_Store
+# Runtime order data (SQLite) - transactional, not source-controlled.
+var/
+
+# Internal-only business data - competitor pricing, rationale, source
+# workbook. This repo is public; never commit these. data/catalog.json
+# (the public parsed catalog) and data/catalog-slug-map.json are fine.
+data/catalog.internal.json
+Shalom_Thailand_*.xlsx
+
+# Claude Code local tooling config, not part of the website itself.
+.claude/
+skills-lock.json

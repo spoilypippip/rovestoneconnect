@@ -1,0 +1,1089 @@
+{
+  "generatedAt": "2026-08-16T09:05:23.856Z",
+  "source": "Shalom_Thailand_ราคา_12หมวด_ต่อวีซ่า (1).xlsx",
+  "categories": [
+    {
+      "number": 1,
+      "slug": "local-information",
+      "name": "Local information",
+      "items": [
+        {
+          "id": "local-information--7-day",
+          "tierLabel": "7 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "แชทถาม-ตอบไม่จำกัด 7 วัน + วิดีโอคอล 1 ครั้ง (30 นาที) กับที่ปรึกษาคนไทย",
+          "unit": "ต่อแพ็ค (7 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 399,
+            "usd": 11.57
+          }
+        },
+        {
+          "id": "local-information--14-day",
+          "tierLabel": "14 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "แชทไม่จำกัด 14 วัน + วิดีโอคอล 2 ครั้ง",
+          "unit": "ต่อแพ็ค (14 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 699,
+            "usd": 20.26
+          }
+        },
+        {
+          "id": "local-information--30-day",
+          "tierLabel": "30 วัน — แนะนำ",
+          "isAddon": false,
+          "recommended": true,
+          "description": "แชท+วิดีโอคอลไม่จำกัด 30 วัน + สรุปเป็นเอกสารตามต้องการ (ธนาคาร/ประกัน/ขนส่ง/วีซ่าเบื้องต้น)",
+          "unit": "ต่อแพ็ค (30 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 1900,
+            "usd": 55.07
+          }
+        },
+        {
+          "id": "local-information--1-year",
+          "tierLabel": "1 ปี",
+          "isAddon": false,
+          "recommended": false,
+          "description": "ที่ปรึกษาประจำไม่จำกัดตลอดปี + ค้นข้อมูลเชิงลึกให้ (รวมประสานเรื่องวีซ่า/สุขภาพเบื้องต้น)",
+          "unit": "ต่อปี (≈825 บาท/เดือน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 9900,
+            "usd": 286.96
+          }
+        },
+        {
+          "id": "local-information--addon-1",
+          "tierLabel": "Add-on: ดำเนินการแทน",
+          "isAddon": true,
+          "recommended": false,
+          "description": "พาไปเปิดบัญชีธนาคาร/ซื้อซิม/ติดตั้งยูทิลิตี้ ให้ที่หน้างาน",
+          "unit": "ต่อครั้ง",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 800,
+            "usd": 23.19
+          }
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "slug": "translation",
+      "name": "Translation",
+      "items": [
+        {
+          "id": "translation--7-day",
+          "tierLabel": "7 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "เครดิตแปลเอกสารมาตรฐาน 1 หน้า + คำปรึกษาว่าต้องแปลเอกสารอะไรบ้าง",
+          "unit": "ต่อแพ็ค (7 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 399,
+            "usd": 11.57
+          }
+        },
+        {
+          "id": "translation--14-day",
+          "tierLabel": "14 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "เครดิตแปลเอกสารมาตรฐาน 3 หน้า + ล่ามโทร/วิดีโอ 30 นาที",
+          "unit": "ต่อแพ็ค (14 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 990,
+            "usd": 28.7
+          }
+        },
+        {
+          "id": "translation--30-day",
+          "tierLabel": "30 วัน — Translation Pass",
+          "isAddon": false,
+          "recommended": false,
+          "description": "เครดิตแปลเอกสารมาตรฐาน 5 หน้า/เดือน + ล่ามโทร/วิดีโอ 1 ชม. ใช้ไม่หมดไม่สะสม",
+          "unit": "ต่อแพ็ค (30 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 2900,
+            "usd": 84.06
+          }
+        },
+        {
+          "id": "translation--1-year",
+          "tierLabel": "1 ปี",
+          "isAddon": false,
+          "recommended": false,
+          "description": "เครดิตแปลเอกสารมาตรฐาน 70 หน้า/ปี (≈5.8 หน้า/เดือน) + ล่ามโทร/วิดีโอ 6 ชม./ปี",
+          "unit": "ต่อปี",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 24900,
+            "usd": 721.74
+          }
+        },
+        {
+          "id": "translation--addon-1",
+          "tierLabel": "Add-on: เอกสารเทคนิค/รับรอง เกินโควตา",
+          "isAddon": true,
+          "recommended": false,
+          "description": "แปลรับรอง/เทคนิค (เอกสารราชการ สัญญา ใบรับรองแพทย์) นอกเหนือโควตาแพ็ค",
+          "unit": "ต่อหน้า",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 1100,
+            "usd": 31.88
+          }
+        },
+        {
+          "id": "translation--addon-2",
+          "tierLabel": "Add-on: ล่ามพบตัวเต็มวัน",
+          "isAddon": true,
+          "recommended": false,
+          "description": "ล่ามพบตัว consecutive เต็มวัน (โรงพยาบาล/ราชการ/เจรจาธุรกิจ)",
+          "unit": "ต่อวัน",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 7500,
+            "usd": 217.39
+          }
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "slug": "finding-trustworthy-services",
+      "name": "Finding trustworthy services",
+      "items": [
+        {
+          "id": "finding-trustworthy-services--7-day",
+          "tierLabel": "7 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "แนะนำผู้ให้บริการที่ตรวจสอบแล้วไม่จำกัดจำนวน ภายใน 7 วัน (1 เรื่อง)",
+          "unit": "ต่อแพ็ค (7 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 399,
+            "usd": 11.57
+          }
+        },
+        {
+          "id": "finding-trustworthy-services--14-day",
+          "tierLabel": "14 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "แนะนำ+เปรียบเทียบราคาผู้ให้บริการ 1 เรื่อง + ประสานติดต่อให้",
+          "unit": "ต่อแพ็ค (14 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 799,
+            "usd": 23.16
+          }
+        },
+        {
+          "id": "finding-trustworthy-services--30-day",
+          "tierLabel": "30 วัน — แนะนำ",
+          "isAddon": false,
+          "recommended": true,
+          "description": "รายชื่อ 3-5 ราย + เปรียบเทียบราคา + ประสานให้ ไม่จำกัดจำนวนเรื่องภายใน 30 วัน",
+          "unit": "ต่อแพ็ค (30 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 1900,
+            "usd": 55.07
+          }
+        },
+        {
+          "id": "finding-trustworthy-services--1-year",
+          "tierLabel": "1 ปี",
+          "isAddon": false,
+          "recommended": false,
+          "description": "ที่ปรึกษาประจำเรื่องการหาผู้ให้บริการที่เชื่อถือได้ ไม่จำกัดจำนวนเรื่องตลอดปี",
+          "unit": "ต่อปี (≈1,075 บาท/เดือน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 12900,
+            "usd": 373.91
+          }
+        },
+        {
+          "id": "finding-trustworthy-services--addon-1",
+          "tierLabel": "Add-on: ตรวจสอบเชิงลึก",
+          "isAddon": true,
+          "recommended": false,
+          "description": "ตรวจสอบเชิงลึกก่อนทำสัญญา/จ่ายเงิน (บริษัท ผู้ให้บริการ ดีลอสังหาฯ คู่ค้า)",
+          "unit": "ต่อเคส",
+          "pricing": {
+            "mode": "quote",
+            "thbLow": 5500,
+            "thbHigh": 22000,
+            "usdLow": 159.42,
+            "usdHigh": 637.68
+          }
+        },
+        {
+          "id": "finding-trustworthy-services--addon-2",
+          "tierLabel": "Add-on: ดำเนินการแทน/ประสานเซ็นสัญญา",
+          "isAddon": true,
+          "recommended": false,
+          "description": "นัดหมาย พาไปพบ และช่วยประสานเซ็นสัญญาให้ถึงที่",
+          "unit": "ต่อครั้ง",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 1200,
+            "usd": 34.78
+          }
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "slug": "accommodation-questions",
+      "name": "Accommodation questions",
+      "items": [
+        {
+          "id": "accommodation-questions--7-day",
+          "tierLabel": "7 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "คำแนะนำทำเล + ประเมินว่าประกาศเช่า/เจ้าของห้องน่าเชื่อถือหรือไม่ ไม่จำกัดจำนวนครั้ง",
+          "unit": "ต่อแพ็ค (7 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 399,
+            "usd": 11.57
+          }
+        },
+        {
+          "id": "accommodation-questions--14-day",
+          "tierLabel": "14 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "คำแนะนำทำเลไม่จำกัด + ตรวจสัญญาเช่า 1 ฉบับ",
+          "unit": "ต่อแพ็ค (14 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 990,
+            "usd": 28.7
+          }
+        },
+        {
+          "id": "accommodation-questions--30-day",
+          "tierLabel": "30 วัน — แนะนำ",
+          "isAddon": false,
+          "recommended": true,
+          "description": "ไม่จำกัดคำถามทำเล + ตรวจสัญญาเช่า 2 ฉบับ + คำแนะนำการเจรจาเงื่อนไข",
+          "unit": "ต่อแพ็ค (30 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 2900,
+            "usd": 84.06
+          }
+        },
+        {
+          "id": "accommodation-questions--1-year",
+          "tierLabel": "1 ปี",
+          "isAddon": false,
+          "recommended": false,
+          "description": "ที่ปรึกษาเรื่องที่พักตลอดปี สำหรับผู้เช่าระยะยาวที่อาจย้ายที่/ต่อสัญญา/มีปัญหาระหว่างปี",
+          "unit": "ต่อปี",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 6900,
+            "usd": 200
+          }
+        },
+        {
+          "id": "accommodation-questions--addon-1",
+          "tierLabel": "Add-on: ค้นหา+พาดูห้อง",
+          "isAddon": true,
+          "recommended": false,
+          "description": "ค้นหา + คัดตัวเลือก + พาดูห้อง (สูงสุด 5 แห่ง) + ช่วยอ่านสัญญา",
+          "unit": "ต่อครั้ง",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 6500,
+            "usd": 188.41
+          }
+        },
+        {
+          "id": "accommodation-questions--addon-2",
+          "tierLabel": "Add-on: ดำเนินการแทนเต็มรูป",
+          "isAddon": true,
+          "recommended": false,
+          "description": "เจรจาราคา + ทำสัญญา + เซ็ตยูทิลิตี้/อินเทอร์เน็ต + ส่งมอบห้อง",
+          "unit": "ต่อครั้ง",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 12000,
+            "usd": 347.83
+          }
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "slug": "travel-arrangements",
+      "name": "Travel arrangements",
+      "items": [
+        {
+          "id": "travel-arrangements--7-day",
+          "tierLabel": "7 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "วางแผนเส้นทาง + แนะนำที่พัก/การเดินทางไม่จำกัดคำถาม (ลูกค้าจองเอง) ก่อนเดินทาง 7 วัน",
+          "unit": "ต่อแพ็ค (7 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 399,
+            "usd": 11.57
+          }
+        },
+        {
+          "id": "travel-arrangements--14-day",
+          "tierLabel": "14 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "วางแผน+ช่วยจองเบื้องต้น + ซัพพอร์ตระหว่างทริป 14 วัน",
+          "unit": "ต่อแพ็ค (14 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 799,
+            "usd": 23.16
+          }
+        },
+        {
+          "id": "travel-arrangements--30-day",
+          "tierLabel": "30 วัน — แนะนำ",
+          "isAddon": false,
+          "recommended": true,
+          "description": "ซัพพอร์ตทริปยาว/หลายจุดหมาย ไม่จำกัดการปรับแผนตลอด 30 วัน",
+          "unit": "ต่อแพ็ค (30 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 2900,
+            "usd": 84.06
+          }
+        },
+        {
+          "id": "travel-arrangements--1-year",
+          "tierLabel": "1 ปี",
+          "isAddon": false,
+          "recommended": false,
+          "description": "ที่ปรึกษาวางแผนไม่จำกัดจำนวนทริป สำหรับนักเดินทางบ่อยในไทยตลอดปี",
+          "unit": "ต่อปี",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 9900,
+            "usd": 286.96
+          }
+        },
+        {
+          "id": "travel-arrangements--addon-1",
+          "tierLabel": "Add-on: จัดการจองครบวงจร",
+          "isAddon": true,
+          "recommended": false,
+          "description": "จัดการจองทั้งหมด (ที่พัก รถ ทัวร์ ตั๋วภายในประเทศ) + ซัพพอร์ตช่วงทริป",
+          "unit": "ต่อทริป",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 3900,
+            "usd": 113.04
+          }
+        },
+        {
+          "id": "travel-arrangements--addon-2",
+          "tierLabel": "Add-on: ทริปสั่งทำ",
+          "isAddon": true,
+          "recommended": false,
+          "description": "จัดทริปสั่งทำ + ผู้ประสานเฉพาะราย + ซัพพอร์ตภาษาฮีบรู 24/7 ตลอดทริป",
+          "unit": "ต่อทริป",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 9900,
+            "usd": 286.96
+          }
+        },
+        {
+          "id": "travel-arrangements--addon-3",
+          "tierLabel": "Add-on: Airport fast-track",
+          "isAddon": true,
+          "recommended": false,
+          "description": "ช่องตรวจคนเข้าเมืองพิเศษ + รับ-ส่ง",
+          "unit": "ต่อคน",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 1200,
+            "usd": 34.78
+          }
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "slug": "relocation",
+      "name": "Relocation",
+      "items": [
+        {
+          "id": "relocation--7-day",
+          "tierLabel": "7 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "ที่ปรึกษาด่วนช่วงตัดสินใจย้ายมาไทย ไม่จำกัดคำถามภายใน 7 วัน",
+          "unit": "ต่อแพ็ค (7 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 699,
+            "usd": 20.26
+          }
+        },
+        {
+          "id": "relocation--14-day",
+          "tierLabel": "14 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "วางแผนย้ายเต็มรูป + เช็คลิสต์ครบขั้นตอน ภายใน 14 วัน",
+          "unit": "ต่อแพ็ค (14 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 1499,
+            "usd": 43.45
+          }
+        },
+        {
+          "id": "relocation--30-day",
+          "tierLabel": "30 วัน — แนะนำ",
+          "isAddon": false,
+          "recommended": true,
+          "description": "ที่ปรึกษาตลอดกระบวนการย้ายมาไทย 1 เดือน (ไม่ลงมือทำ)",
+          "unit": "ต่อแพ็ค (30 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 3500,
+            "usd": 101.45
+          }
+        },
+        {
+          "id": "relocation--1-year",
+          "tierLabel": "1 ปี",
+          "isAddon": false,
+          "recommended": false,
+          "description": "ที่ปรึกษาย้ายถิ่นไม่จำกัดตลอดปี สำหรับครอบครัว/บริษัทที่ทยอยย้ายพนักงาน",
+          "unit": "ต่อปี",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 12900,
+            "usd": 373.91
+          }
+        },
+        {
+          "id": "relocation--addon-1",
+          "tierLabel": "Add-on: Arrival Package",
+          "isAddon": true,
+          "recommended": false,
+          "description": "แพ็กมาถึง: ซิม + เปิดบัญชีธนาคาร + ยูทิลิตี้ + orientation ครึ่งวัน",
+          "unit": "ต่อแพ็ก",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 13000,
+            "usd": 376.81
+          }
+        },
+        {
+          "id": "relocation--addon-2",
+          "tierLabel": "Add-on: Full Package",
+          "isAddon": true,
+          "recommended": false,
+          "description": "+ หาที่พัก + ประสานวีซ่ากับตัวแทนมีใบอนุญาต + แนะนำโรงเรียน",
+          "unit": "ต่อแพ็ก",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 32000,
+            "usd": 927.54
+          }
+        },
+        {
+          "id": "relocation--addon-3",
+          "tierLabel": "Add-on: Premium Family",
+          "isAddon": true,
+          "recommended": false,
+          "description": "ย้ายครบวงจรทั้งครอบครัว + โรงเรียน + วีซ่าระยะยาว + ซัพพอร์ตต่อเนื่อง 90 วัน",
+          "unit": "ต่อแพ็ก",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 85000,
+            "usd": 2463.77
+          }
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "slug": "local-culture",
+      "name": "Local culture",
+      "items": [
+        {
+          "id": "local-culture--7-day",
+          "tierLabel": "7 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "โปรแกรมปรับตัวเข้าวัฒนธรรมไทยเร่งด่วน (เนื้อหา self-paced + เซสชันสด 1 ครั้ง)",
+          "unit": "ต่อคน (โปรแกรม 7 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 699,
+            "usd": 20.26
+          }
+        },
+        {
+          "id": "local-culture--14-day",
+          "tierLabel": "14 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "คอร์สภาษาไทยพื้นฐาน + วัฒนธรรม (2 เซสชันสด)",
+          "unit": "ต่อคน (โปรแกรม 14 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 2499,
+            "usd": 72.43
+          }
+        },
+        {
+          "id": "local-culture--30-day",
+          "tierLabel": "30 วัน — แนะนำ",
+          "isAddon": false,
+          "recommended": true,
+          "description": "คอร์สภาษาไทยเพื่อชีวิตประจำวัน 10 ชม. + วัฒนธรรมธุรกิจไทย",
+          "unit": "ต่อคอร์ส (30 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 7900,
+            "usd": 228.99
+          }
+        },
+        {
+          "id": "local-culture--1-year",
+          "tierLabel": "1 ปี",
+          "isAddon": false,
+          "recommended": false,
+          "description": "โปรแกรมเรียนภาษาไทยต่อเนื่อง + เวิร์กชอปวัฒนธรรมทุกไตรมาส (4 ครั้ง/ปี)",
+          "unit": "ต่อปี",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 24900,
+            "usd": 721.74
+          }
+        },
+        {
+          "id": "local-culture--addon-1",
+          "tierLabel": "Add-on: เวิร์กชอปกลุ่ม",
+          "isAddon": true,
+          "recommended": false,
+          "description": "เวิร์กชอปวัฒนธรรมไทยเบื้องต้น (มารยาท การไหว้ ข้อห้าม วัด) — กลุ่ม ครั้งเดียว",
+          "unit": "ต่อคน",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 1900,
+            "usd": 55.07
+          }
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "slug": "business-support",
+      "name": "Business support",
+      "items": [
+        {
+          "id": "business-support--7-day",
+          "tierLabel": "7 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "ที่ปรึกษาด่วนประเมินความเป็นไปได้ทางธุรกิจ ไม่จำกัดคำถามภายใน 7 วัน",
+          "unit": "ต่อแพ็ค (7 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 699,
+            "usd": 20.26
+          }
+        },
+        {
+          "id": "business-support--14-day",
+          "tierLabel": "14 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "วางแผนเข้าตลาด + โครงสร้างธุรกิจเต็มรูป ภายใน 14 วัน",
+          "unit": "ต่อแพ็ค (14 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 1999,
+            "usd": 57.94
+          }
+        },
+        {
+          "id": "business-support--30-day",
+          "tierLabel": "30 วัน — แนะนำ",
+          "isAddon": false,
+          "recommended": true,
+          "description": "ที่ปรึกษาตลอดกระบวนการตัดสินใจ+เริ่มต้นธุรกิจ 1 เดือน (ไม่รวมดำเนินการจดทะเบียน)",
+          "unit": "ต่อแพ็ค (30 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 4900,
+            "usd": 142.03
+          }
+        },
+        {
+          "id": "business-support--1-year",
+          "tierLabel": "1 ปี",
+          "isAddon": false,
+          "recommended": false,
+          "description": "ที่ปรึกษาธุรกิจประจำปีสำหรับผู้ประกอบการ ไม่จำกัดจำนวนคำถาม",
+          "unit": "ต่อปี (≈2,490 บาท/เดือน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 29900,
+            "usd": 866.67
+          }
+        },
+        {
+          "id": "business-support--addon-1",
+          "tierLabel": "Add-on: จดทะเบียนบริษัท",
+          "isAddon": true,
+          "recommended": false,
+          "description": "ประสานจดทะเบียนบริษัทกับสำนักงานมีใบอนุญาต + เปิดบัญชีธนาคารนิติบุคคล",
+          "unit": "ต่อเคส",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 28000,
+            "usd": 811.59
+          }
+        },
+        {
+          "id": "business-support--addon-2",
+          "tierLabel": "Add-on: BOI+Work Permit",
+          "isAddon": true,
+          "recommended": false,
+          "description": "BOI advisory + work permit + liaison ต่อเนื่อง 6 เดือน",
+          "unit": "ต่อเคส",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 120000,
+            "usd": 3478.26
+          }
+        },
+        {
+          "id": "business-support--addon-3",
+          "tierLabel": "Add-on: เวิร์กชอปวัฒนธรรมธุรกิจ",
+          "isAddon": true,
+          "recommended": false,
+          "description": "เวิร์กชอปวัฒนธรรมธุรกิจไทยสำหรับทีม (ครึ่งวัน)",
+          "unit": "ต่อกลุ่ม",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 18000,
+            "usd": 521.74
+          }
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "slug": "booking-coordination",
+      "name": "Booking coordination",
+      "items": [
+        {
+          "id": "booking-coordination--7-day",
+          "tierLabel": "7 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "จองร้านอาหาร/กิจกรรม/สปา ไม่จำกัดรายการ ภายใน 7 วัน (ฟรีสำหรับสมาชิก)",
+          "unit": "ต่อแพ็ค (7 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 199,
+            "usd": 5.77
+          },
+          "memberNote": "Free for members."
+        },
+        {
+          "id": "booking-coordination--14-day",
+          "tierLabel": "14 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "จองไม่จำกัดรายการ 14 วัน",
+          "unit": "ต่อแพ็ค (14 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 699,
+            "usd": 20.26
+          }
+        },
+        {
+          "id": "booking-coordination--30-day",
+          "tierLabel": "30 วัน — แนะนำ",
+          "isAddon": false,
+          "recommended": true,
+          "description": "แพ็กจองหลายรายการไม่จำกัด (ร้าน + ทัวร์ + รถ + สปา) + VIP reservation 1 ครั้ง",
+          "unit": "ต่อแพ็ค (30 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 1900,
+            "usd": 55.07
+          }
+        },
+        {
+          "id": "booking-coordination--1-year",
+          "tierLabel": "1 ปี",
+          "isAddon": false,
+          "recommended": false,
+          "description": "จองไม่จำกัดตลอดปี สำหรับผู้ที่อยู่ไทยถาวร/เดินทางบ่อย",
+          "unit": "ต่อปี",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 9900,
+            "usd": 286.96
+          }
+        },
+        {
+          "id": "booking-coordination--addon-1",
+          "tierLabel": "Add-on: VIP reservation เพิ่มเติม",
+          "isAddon": true,
+          "recommended": false,
+          "description": "VIP reservations (โต๊ะ superclub อีเวนต์ ที่นั่งพิเศษ ร้านที่จองยาก) นอกเหนือโควตา",
+          "unit": "ต่อรายการ",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 3900,
+            "usd": 113.04
+          }
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "slug": "vip-concierge",
+      "name": "VIP concierge",
+      "items": [
+        {
+          "id": "vip-concierge--7-day",
+          "tierLabel": "7 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "ทดลอง concierge เฉพาะราย + แชท 12/7 ผู้ช่วยพบตัวคิดชั่วโมงแยก",
+          "unit": "ต่อแพ็ค (7 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 1499,
+            "usd": 43.45
+          }
+        },
+        {
+          "id": "vip-concierge--14-day",
+          "tierLabel": "14 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "concierge เฉพาะราย + วิดีโอคอล + ตอบภายใน 15 นาที",
+          "unit": "ต่อแพ็ค (14 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 2999,
+            "usd": 86.93
+          }
+        },
+        {
+          "id": "vip-concierge--30-day",
+          "tierLabel": "30 วัน — แนะนำ",
+          "isAddon": false,
+          "recommended": true,
+          "description": "concierge เฉพาะราย + แชท 12/7 + ผู้ช่วยพบตัวคิดชั่วโมงแยก",
+          "unit": "ต่อแพ็ค (30 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 5500,
+            "usd": 159.42
+          }
+        },
+        {
+          "id": "vip-concierge--1-year",
+          "tierLabel": "1 ปี",
+          "isAddon": false,
+          "recommended": false,
+          "description": "concierge เฉพาะราย ไม่จำกัดตลอดปี (ระดับเทียบเท่าแพ็ค 30 วัน)",
+          "unit": "ต่อปี (≈4,583 บาท/เดือน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 55000,
+            "usd": 1594.2
+          }
+        },
+        {
+          "id": "vip-concierge--addon-1",
+          "tierLabel": "Add-on: อัพเกรดระดับ Standard",
+          "isAddon": true,
+          "recommended": false,
+          "description": "+ วิดีโอคอล + ตอบภายใน 15 นาที + ผู้ช่วยพบตัวราคาถูกลง (คิดเพิ่มจากแพ็คหลักรายเดือน)",
+          "unit": "ต่อเดือน",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 8200,
+            "usd": 237.68
+          }
+        },
+        {
+          "id": "vip-concierge--addon-2",
+          "tierLabel": "Add-on: อัพเกรดระดับ Premium",
+          "isAddon": true,
+          "recommended": false,
+          "description": "senior concierge + ตอบภายใน 5 นาที + ผู้ช่วยพบตัวฟรี 10 ชม./เดือน",
+          "unit": "ต่อเดือน",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 13500,
+            "usd": 391.3
+          }
+        },
+        {
+          "id": "vip-concierge--addon-3",
+          "tierLabel": "Add-on: ผู้ช่วยส่วนตัว/fixer พบตัว",
+          "isAddon": true,
+          "recommended": false,
+          "description": "ผู้ช่วยส่วนตัว/fixer พบตัว (ครึ่งวัน 4 ชม. / เต็มวัน 10 ชม.)",
+          "unit": "ต่อครั้ง",
+          "pricing": {
+            "mode": "quote",
+            "thbLow": 2800,
+            "thbHigh": 4500,
+            "usdLow": 81.16,
+            "usdHigh": 130.43
+          }
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "slug": "community-connection",
+      "name": "Community connection",
+      "items": [
+        {
+          "id": "community-connection--7-day",
+          "tierLabel": "7 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "เข้ากลุ่มชุมชน + ปฏิทินอีเวนต์ + ส่วนลดพันธมิตรพื้นฐาน (ทดลอง)",
+          "unit": "ต่อแพ็ค (7 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 99,
+            "usd": 2.87
+          }
+        },
+        {
+          "id": "community-connection--14-day",
+          "tierLabel": "14 วัน",
+          "isAddon": false,
+          "recommended": false,
+          "description": "เข้ากลุ่มชุมชน + ปฏิทินอีเวนต์ + ส่วนลดพันธมิตรพื้นฐาน",
+          "unit": "ต่อแพ็ค (14 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 199,
+            "usd": 5.77
+          }
+        },
+        {
+          "id": "community-connection--30-day",
+          "tierLabel": "30 วัน — แนะนำ",
+          "isAddon": false,
+          "recommended": true,
+          "description": "เข้ากลุ่มชุมชน + ปฏิทินอีเวนต์ + ส่วนลดพันธมิตรพื้นฐาน",
+          "unit": "ต่อแพ็ค (30 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 390,
+            "usd": 11.3
+          }
+        },
+        {
+          "id": "community-connection--1-year",
+          "tierLabel": "1 ปี",
+          "isAddon": false,
+          "recommended": false,
+          "description": "+ ส่วนลดพรีเมียม + อีเวนต์เฉพาะสมาชิก + บัตรสมาชิก + แนะนำคอนเน็กชัน",
+          "unit": "ต่อปี",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 3200,
+            "usd": 92.75
+          }
+        },
+        {
+          "id": "community-connection--addon-1",
+          "tierLabel": "Add-on: Premium Family+Business",
+          "isAddon": true,
+          "recommended": false,
+          "description": "แพ็กครอบครัว + อีเวนต์ทั้งหมดรวมแล้ว + แนะนำเครือข่ายธุรกิจ",
+          "unit": "ต่อปี",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 6500,
+            "usd": 188.41
+          }
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "slug": "visa-extension-advisory",
+      "name": "Visa extension advisory",
+      "items": [
+        {
+          "id": "visa-extension-advisory--7-day",
+          "tierLabel": "7 วัน (เร่งด่วน)",
+          "isAddon": false,
+          "recommended": false,
+          "description": "สำหรับวีซ่าใกล้หมดอายุ หรือเพิ่งถึงไทยต้องตัดสินใจด่วน — แชทด่วนไม่จำกัด (ตอบภายใน 2 ชม.) + วิดีโอคอล 1 ครั้ง (30 นาที) กับที่ปรึกษาคนไทย local + เช็คลิสต์เอกสารเฉพาะเคส",
+          "unit": "ต่อแพ็ค (7 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 399,
+            "usd": 11.57
+          }
+        },
+        {
+          "id": "visa-extension-advisory--14-day",
+          "tierLabel": "14 วัน (มาตรฐาน)",
+          "isAddon": false,
+          "recommended": false,
+          "description": "ครอบคลุมกระบวนการเตรียม-ยื่นวีซ่านักท่องเที่ยว/ผ่อนผันหนึ่งรอบ — แชท+โทรไม่จำกัด + วิดีโอคอล 2 ครั้ง + ตรวจเอกสารก่อนยื่น 1 รอบ + แผนขั้นตอนเป็นลายลักษณ์อักษร",
+          "unit": "ต่อแพ็ค (14 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 699,
+            "usd": 20.26
+          }
+        },
+        {
+          "id": "visa-extension-advisory--30-day",
+          "tierLabel": "30 วัน (ครบรอบ) — แพ็คแนะนำ",
+          "isAddon": false,
+          "recommended": true,
+          "description": "ครอบคลุมกระบวนการต่อวีซ่านักท่องเที่ยว/ผ่อนผัน/Non-O เต็มรอบ ตั้งแต่เตรียมเอกสารถึงติดตามผล รวมช่วยแก้ปัญหาระหว่างทาง — แชท+โทรไม่จำกัด + ตรวจเอกสาร 2 รอบ + ช่วยเตรียมคิว/นัดหมายที่ ตม. + ติดตามสถานะจนจบเรื่อง",
+          "unit": "ต่อแพ็ค (30 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 1900,
+            "usd": 55.07
+          }
+        },
+        {
+          "id": "visa-extension-advisory--90-day",
+          "tierLabel": "90 วัน (รอบ Non-O)",
+          "isAddon": false,
+          "recommended": false,
+          "description": "สำหรับผู้ถือ Non-Immigrant O ที่ต้องรายงานตัวทุก 90 วันและวางแผนต่อวีซ่ารอบถัดไป — รวมทุกอย่างในแพ็ค 30 วัน + แจ้งเตือนกำหนดรายงานตัว 90 วัน + รีวิวคุณสมบัติ/เอกสารก่อนต่อวีซ่ารอบถัดไป",
+          "unit": "ต่อแพ็ค (90 วัน)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 3500,
+            "usd": 101.45
+          }
+        },
+        {
+          "id": "visa-extension-advisory--1-year",
+          "tierLabel": "1 ปี (รายปี)",
+          "isAddon": false,
+          "recommended": false,
+          "description": "สำหรับผู้ถือวีซ่า Non-O ปีต่อปี (เกษียณ/สมรส/ทำงาน) หรือ Long Stay ที่ต้องบริหารทั้งปี — ที่ปรึกษาประจำตลอดปี + แจ้งเตือนรายงานตัว 90 วันทุกรอบ (4 ครั้ง/ปี) + ตรวจเอกสารก่อนต่อวีซ่าประจำปี + ส่วนลด 15% เมื่ออัปเกรดเป็น Full-Service ครั้งใดก็ได้ในปีนั้น",
+          "unit": "ต่อปี (แบ่งจ่ายไตรมาสละ 2,500 บาทได้)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 8900,
+            "usd": 257.97
+          }
+        },
+        {
+          "id": "visa-extension-advisory--addon-1",
+          "tierLabel": "Add-on: ดำเนินการยื่นเรื่อง — ต่อวีซ่านักท่องเที่ยว/ผ่อนผัน",
+          "isAddon": true,
+          "recommended": false,
+          "description": "เราไปยื่นเรื่องแทนหรือไปด้วยที่ ตม. ให้ (ต่อครั้ง) — ไม่รวมค่าธรรมเนียมรัฐ 1,900 บาท ซึ่งจ่ายตามจริงให้ ตม. โดยตรง",
+          "unit": "ต่อครั้ง (บวกจากแพ็คปรึกษาที่เลือก)",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 1200,
+            "usd": 34.78
+          }
+        },
+        {
+          "id": "visa-extension-advisory--addon-2",
+          "tierLabel": "Add-on: ดำเนินการยื่นเรื่อง — รายงานตัว 90 วัน",
+          "isAddon": true,
+          "recommended": false,
+          "description": "ยื่นรายงานตัว 90 วัน (TM.47) แทนหรือแจ้งออนไลน์ให้ ต่อครั้ง — ไม่มีค่าธรรมเนียมรัฐ",
+          "unit": "ต่อครั้ง",
+          "pricing": {
+            "mode": "fixed",
+            "thb": 600,
+            "usd": 17.39
+          }
+        },
+        {
+          "id": "visa-extension-advisory--addon-3",
+          "tierLabel": "Add-on: ดำเนินการยื่นเรื่อง — ต่อ Non-Immigrant O ประจำปี",
+          "isAddon": true,
+          "recommended": false,
+          "description": "ประสานเอกสารและยื่นต่อวีซ่า Non-O ประจำปี (เกษียณ/สมรส/ทำงาน) ผ่านตัวแทนมีใบอนุญาต — ไม่รวมค่าธรรมเนียมรัฐ 1,900 บาท และค่าใช้จ่ายอื่น (ประกันสุขภาพ ฯลฯ) ซึ่งจ่ายตามจริง",
+          "unit": "ต่อครั้ง",
+          "pricing": {
+            "mode": "quote",
+            "thbLow": 6500,
+            "thbHigh": 9000,
+            "usdLow": 188.41,
+            "usdHigh": 260.87
+          }
+        },
+        {
+          "id": "visa-extension-advisory--addon-4",
+          "tierLabel": "Add-on: ดำเนินการยื่นเรื่อง — Long Stay (O-A/O-X) หรือ LTR",
+          "isAddon": true,
+          "recommended": false,
+          "description": "ประสานเอกสารและยื่นวีซ่าพำนักระยะยาว (O-A 1 ปี / O-X 10 ปี / LTR) ผ่านตัวแทนมีใบอนุญาต — ไม่รวมค่าธรรมเนียมรัฐและประกันสุขภาพซึ่งจ่ายตามจริง",
+          "unit": "ต่อครั้ง",
+          "pricing": {
+            "mode": "quote",
+            "thbLow": 12000,
+            "thbHigh": 16000,
+            "usdLow": 347.83,
+            "usdHigh": 463.77
+          }
+        },
+        {
+          "id": "visa-extension-advisory--addon-5",
+          "tierLabel": "Add-on: ดำเนินการยื่นเรื่อง — DTV (Destination Thailand Visa)",
+          "isAddon": true,
+          "recommended": false,
+          "description": "ประสานเอกสารและยื่น DTV ให้ — ไม่รวมค่าธรรมเนียมรัฐ ~10,000 บาท ซึ่งจ่ายตามจริง",
+          "unit": "ต่อครั้ง",
+          "pricing": {
+            "mode": "quote",
+            "thbLow": 3500,
+            "thbHigh": 4800,
+            "usdLow": 101.45,
+            "usdHigh": 139.13
+          }
+        }
+      ]
+    }
+  ]
+}

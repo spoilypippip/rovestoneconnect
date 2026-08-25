@@ -1,0 +1,30 @@
+import Container from "./Container";
+import Reveal from "./Reveal";
+import { testimonials } from "@/content/site";
+
+export default function Testimonials() {
+  return (
+    <section aria-labelledby="testimonials-heading" className="py-20 md:py-32">
+      <Container>
+        <h2 id="testimonials-heading" className="sr-only">
+          Client notes
+        </h2>
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
+          {testimonials.map((item, i) => (
+            <Reveal key={item.name} delay={i * 70}>
+              <blockquote className="border-l border-brass pl-6">
+                <p className="text-lg leading-relaxed text-ink">
+                  &ldquo;{item.quote}&rdquo;
+                </p>
+                <footer className="mt-4 text-sm text-charcoal">
+                  {item.name}
+                  <span className="text-charcoal/70">, {item.role}</span>
+                </footer>
+              </blockquote>
+            </Reveal>
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
+}
