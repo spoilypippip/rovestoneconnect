@@ -42,7 +42,7 @@ export default async function CategoryPage({
     <section className="py-20 md:py-32">
       <Container>
         <Reveal className="max-w-2xl">
-          <Link href="/#services" className="text-sm text-charcoal transition-colors hover:text-ink">
+          <Link href="/services" className="text-sm text-charcoal transition-colors hover:text-ink">
             ← All Services
           </Link>
           <h1 className="mt-5 text-3xl tracking-tight text-ink md:text-4xl">{category.name}</h1>

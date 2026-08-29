@@ -1,6 +1,6 @@
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
-import ServicesSection from "@/components/ServicesSection";
+import FeaturedService from "@/components/FeaturedService";
 import HowWeWork from "@/components/HowWeWork";
 import SignatureEngagement from "@/components/SignatureEngagement";
 import Testimonials from "@/components/Testimonials";
@@ -12,7 +12,7 @@ export default function Home() {
     <>
       <Hero />
       <TrustBar />
-      <ServicesSection />
+      <FeaturedService />
       <HowWeWork />
       <SignatureEngagement />
       <Testimonials />

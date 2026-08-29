@@ -20,7 +20,7 @@ export default function CartPage() {
             Browse our services to find one to add.
           </p>
           <Link
-            href="/#services"
+            href="/services"
             className="mt-8 inline-block border border-brass px-6 py-3 text-sm text-ink transition-colors hover:bg-brass hover:text-paper"
           >
             Browse Services

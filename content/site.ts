@@ -1,7 +1,7 @@
 export const siteName = "RoveStone Connect";
 
 export const navLinks = [
-  { label: "Services", href: "/#services" },
+  { label: "Services", href: "/services" },
   { label: "How We Work", href: "/#how-we-work" },
   { label: "About", href: "/#about" },
 ];
@@ -71,7 +71,7 @@ export const about = {
 };
 
 export const footerLinks = [
-  { label: "Services", href: "/#services" },
+  { label: "Services", href: "/services" },
   { label: "How We Work", href: "/#how-we-work" },
   { label: "About", href: "/#about" },
   { label: "Contact", href: "/contact" },
