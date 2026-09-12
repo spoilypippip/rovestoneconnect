@@ -63,6 +63,12 @@ export const testimonials = [
     name: "Regional HR Director",
     role: "Multinational Manufacturing Group",
   },
+  {
+    quote:
+      "I don't even know if I deserve such a wonderful surprise!! It's been such a long time since I last went to Thailand, so getting everything ready for the trip hasn't been easy. But thanks to you, I already feel so much more relaxed even before the trip has started!!",
+    name: "Shin SoYoon",
+    role: "Traveller",
+  },
 ];
 
 export const about = {

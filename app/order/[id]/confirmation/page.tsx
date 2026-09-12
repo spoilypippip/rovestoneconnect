@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Container from "@/components/Container";
 import { getOrderStore } from "@/lib/orders";
+import { paymentProvider } from "@/lib/payments";
 
 function formatTHB(n: number) {
   return `฿${n.toLocaleString("en-US")}`;
@@ -19,13 +20,27 @@ function lineDeepLink(orderId: string, itemNames: string[]): string | null {
 
 export default async function OrderConfirmationPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ session_id?: string }>;
 }) {
   const { id } = await params;
+  const { session_id: stripeSessionId } = await searchParams;
   const orderStore = await getOrderStore();
-  const order = await orderStore.get(id);
+  let order = await orderStore.get(id);
   if (!order) notFound();
+
+  // Stripe's redirect back to this page can arrive before its webhook
+  // does. If so, this fills the gap by checking the session directly
+  // rather than showing a stale "pending" status the webhook would
+  // otherwise correct moments later.
+  if (order.status === "pending_payment" && stripeSessionId) {
+    const result = await paymentProvider.verifyPayment(stripeSessionId);
+    if (result.status !== "pending") {
+      order = await orderStore.updateStatus(id, result.status === "paid" ? "paid" : "failed");
+    }
+  }
 
   const lineHref = lineDeepLink(
     order.id,
@@ -42,8 +57,10 @@ export default async function OrderConfirmationPage({
           Thank you, {order.customer.name.split(" ")[0]}.
         </h1>
         <p className="mt-4 text-sm leading-relaxed text-charcoal">
-          Order #{order.id}. We&rsquo;re verifying your transfer now and will
-          confirm shortly.
+          Order #{order.id}.{" "}
+          {order.status === "paid"
+            ? "Payment received - we're on it."
+            : "We're verifying your payment now and will confirm shortly."}
         </p>
 
         <div className="mt-10 divide-y divide-line border-y border-line text-left">

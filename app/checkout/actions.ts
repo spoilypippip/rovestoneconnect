@@ -3,7 +3,7 @@
 import { getItemWithCategory } from "@/content/catalog";
 import { getOrderStore } from "@/lib/orders";
 import type { OrderCustomer, OrderItem } from "@/lib/orders/types";
-import { paymentProvider, manualTransferDetails } from "@/lib/payments";
+import { paymentProvider, activePaymentProviderName, manualTransferDetails } from "@/lib/payments";
 import { notificationProvider } from "@/lib/notifications";
 
 export type CheckoutLineInput = { id: string; qty: number };
@@ -54,7 +54,7 @@ export async function createOrder(
     customer,
     items,
     totalThb,
-    paymentProvider: "manual-transfer",
+    paymentProvider: activePaymentProviderName,
   });
 
   const session = await paymentProvider.createCheckoutSession(order);

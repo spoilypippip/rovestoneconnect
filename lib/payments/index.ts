@@ -1,11 +1,15 @@
 import { ManualTransferProvider } from "./manual-transfer";
+import { StripeCheckoutProvider } from "./stripe";
 import type { PaymentProvider } from "./types";
 
-// TODO: once a gateway is chosen (Omise/Opn or 2C2P are the two most
-// relevant for a Thai-registered business taking foreign cards), add a
-// second class implementing PaymentProvider and select it here via
-// PAYMENT_PROVIDER, e.g. `process.env.PAYMENT_PROVIDER === "omise"`.
-export const paymentProvider: PaymentProvider = new ManualTransferProvider();
+// Manual transfer is the default so local development and demos need no
+// external account. Set STRIPE_SECRET_KEY (and, before going live,
+// STRIPE_WEBHOOK_SECRET - see stripe.ts) to switch a deployment to Stripe
+// Checkout instead.
+export const activePaymentProviderName = process.env.STRIPE_SECRET_KEY ? "stripe" : "manual-transfer";
+
+export const paymentProvider: PaymentProvider =
+  activePaymentProviderName === "stripe" ? new StripeCheckoutProvider() : new ManualTransferProvider();
 
 export { manualTransferDetails } from "./manual-transfer";
 export type { PaymentEvent, PaymentProvider } from "./types";
