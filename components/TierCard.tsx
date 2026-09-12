@@ -1,5 +1,5 @@
 import type { CatalogItem } from "@/content/catalog";
-import { itemCopy } from "@/content/catalog-copy";
+import { itemCopy, unitCopy } from "@/content/catalog-copy";
 import TierCardAction from "@/components/cart/TierCardAction";
 import Amount from "@/components/Amount";
 
@@ -50,7 +50,7 @@ export default function TierCard({
         <span
           className={`text-xs ${item.recommended ? "text-paper/60" : "text-charcoal/70"}`}
         >
-          {item.unit}
+          {unitCopy[item.unit] ?? item.unit}
         </span>
       </div>
 

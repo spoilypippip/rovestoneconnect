@@ -4,6 +4,37 @@
 // English-only) site, keyed by the same stable item/category ids so it
 // survives re-running `npm run catalog:import`.
 
+// The workbook's `unit` field (e.g. "ต่อแพ็ค (7 วัน)") is also Thai and,
+// unlike name/description, isn't keyed by item id - only ~20 distinct
+// strings recur across the whole catalog, so this maps the raw value
+// directly.
+export const unitCopy: Record<string, string> = {
+  "ต่อแพ็ค (7 วัน)": "per package (7 days)",
+  "ต่อแพ็ค (14 วัน)": "per package (14 days)",
+  "ต่อแพ็ค (30 วัน)": "per package (30 days)",
+  "ต่อแพ็ค (90 วัน)": "per package (90 days)",
+  "ต่อแพ็ก": "per package",
+  "ต่อปี (≈825 บาท/เดือน)": "per year (≈฿825/month)",
+  "ต่อปี (≈1,075 บาท/เดือน)": "per year (≈฿1,075/month)",
+  "ต่อปี (≈2,490 บาท/เดือน)": "per year (≈฿2,490/month)",
+  "ต่อปี (≈4,583 บาท/เดือน)": "per year (≈฿4,583/month)",
+  "ต่อปี (แบ่งจ่ายไตรมาสละ 2,500 บาทได้)": "per year (payable quarterly at ฿2,500)",
+  "ต่อปี": "per year",
+  "ต่อครั้ง": "per occurrence",
+  "ต่อครั้ง (บวกจากแพ็คปรึกษาที่เลือก)": "per occurrence (added on top of your chosen advisory package)",
+  "ต่อหน้า": "per page",
+  "ต่อวัน": "per day",
+  "ต่อเดือน": "per month",
+  "ต่อเคส": "per case",
+  "ต่อทริป": "per trip",
+  "ต่อคน": "per person",
+  "ต่อคน (โปรแกรม 7 วัน)": "per person (7-day program)",
+  "ต่อคน (โปรแกรม 14 วัน)": "per person (14-day program)",
+  "ต่อคอร์ส (30 วัน)": "per course (30 days)",
+  "ต่อกลุ่ม": "per group",
+  "ต่อรายการ": "per item",
+};
+
 export const categoryCopy: Record<string, { tagline: string }> = {
   "local-information": {
     tagline:
