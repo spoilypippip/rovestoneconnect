@@ -53,18 +53,6 @@ export const signatureEngagement = {
 export const testimonials = [
   {
     quote:
-      "[PLACEHOLDER: replace with real client quote] RoveStone Connect handled our regional offsite from venue sourcing through visa logistics for eleven delegates. Nothing surprised us.",
-    name: "VP of Global Events",
-    role: "Regional Technology Company",
-  },
-  {
-    quote:
-      "[PLACEHOLDER: replace with real client quote] Independent advice, delivered on our timeline. They said no to an option that wasn't right for us, which is exactly what we needed to hear.",
-    name: "Regional HR Director",
-    role: "Multinational Manufacturing Group",
-  },
-  {
-    quote:
       "I don't even know if I deserve such a wonderful surprise!! It's been such a long time since I last went to Thailand, so getting everything ready for the trip hasn't been easy. But thanks to you, I already feel so much more relaxed even before the trip has started!!",
     name: "Shin SoYoon",
     role: "Traveller",
