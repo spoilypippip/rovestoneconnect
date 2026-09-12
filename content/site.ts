@@ -15,13 +15,6 @@ export const hero = {
     "RoveStone Connect provides independent advisory and on-the-ground support for MICE programs, business travel, and market entry, from local specialists who know how Thailand actually works.",
 };
 
-export const trustBar = [
-  "12 Service Lines",
-  "Multilingual Team",
-  "Independent Advisory",
-  "Bangkok-Based",
-];
-
 export const processSteps = [
   {
     number: "01",
