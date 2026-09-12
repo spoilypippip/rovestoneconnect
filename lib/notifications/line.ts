@@ -1,5 +1,6 @@
 import type { Order } from "@/lib/orders/types";
 import type { NotificationProvider, QuoteRequestDetails } from "./types";
+import { formatCharged } from "@/lib/currency";
 
 // TODO: set LINE_CHANNEL_ACCESS_TOKEN and LINE_TARGET_ID (a user or group
 // id from the LINE Official Account Manager) before enabling this
@@ -34,7 +35,7 @@ export class LineNotificationProvider implements NotificationProvider {
   async notifyNewOrder(order: Order): Promise<void> {
     const itemNames = order.items.map((item) => `${item.name} x${item.qty}`).join(", ");
     await push(
-      `New order: ${order.id}\nStatus: ${order.status}\nCustomer: ${order.customer.name} (${order.customer.phone})\nTotal: ฿${order.totalThb.toLocaleString("en-US")}\nItems: ${itemNames}`,
+      `New order: ${order.id}\nStatus: ${order.status}\nCustomer: ${order.customer.name} (${order.customer.phone})\nTotal: ${formatCharged(order.currency, order.totalThb, order.totalUsd)}\nItems: ${itemNames}`,
     );
   }
 

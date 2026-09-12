@@ -1,3 +1,5 @@
+import type { Currency } from "@/lib/currency";
+
 export type OrderStatus =
   | "pending_payment"
   | "pending_verification"
@@ -12,6 +14,7 @@ export type OrderItem = {
   categorySlug: string;
   name: string;
   unitPriceThb: number;
+  unitPriceUsd: number | null;
   qty: number;
 };
 
@@ -29,6 +32,10 @@ export type Order = {
   customer: OrderCustomer;
   items: OrderItem[];
   totalThb: number;
+  // The currency actually charged - null totalUsd means this order predates
+  // USD checkout (or one of its items had no USD price at order time).
+  currency: Currency;
+  totalUsd: number | null;
   status: OrderStatus;
   paymentProvider: string;
 };
@@ -37,6 +44,8 @@ export type NewOrderInput = {
   customer: OrderCustomer;
   items: OrderItem[];
   totalThb: number;
+  currency: Currency;
+  totalUsd: number | null;
   paymentProvider: string;
 };
 

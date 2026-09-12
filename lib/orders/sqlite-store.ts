@@ -31,10 +31,24 @@ function getDb(): DatabaseSync {
       preferred_language TEXT NOT NULL,
       items_json TEXT NOT NULL,
       total_thb INTEGER NOT NULL,
+      currency TEXT NOT NULL DEFAULT 'THB',
+      total_usd REAL,
       status TEXT NOT NULL,
       payment_provider TEXT NOT NULL
     )
   `);
+  // Added after the table already existed on some local dev databases;
+  // CREATE TABLE IF NOT EXISTS above doesn't retrofit columns onto those.
+  for (const stmt of [
+    `ALTER TABLE orders ADD COLUMN currency TEXT NOT NULL DEFAULT 'THB'`,
+    `ALTER TABLE orders ADD COLUMN total_usd REAL`,
+  ]) {
+    try {
+      db.exec(stmt);
+    } catch {
+      // Column already exists - fine.
+    }
+  }
   return db;
 }
 
@@ -51,6 +65,8 @@ function rowToOrder(row: Record<string, unknown>): Order {
     },
     items: JSON.parse(row.items_json as string),
     totalThb: row.total_thb as number,
+    currency: (row.currency as Order["currency"]) ?? "THB",
+    totalUsd: (row.total_usd as number | null) ?? null,
     status: row.status as OrderStatus,
     paymentProvider: row.payment_provider as string,
   };
@@ -64,6 +80,8 @@ export class SqliteOrderStore implements OrderStore {
       customer: input.customer,
       items: input.items,
       totalThb: input.totalThb,
+      currency: input.currency,
+      totalUsd: input.totalUsd,
       status: "pending_payment",
       paymentProvider: input.paymentProvider,
     };
@@ -71,8 +89,8 @@ export class SqliteOrderStore implements OrderStore {
     getDb()
       .prepare(
         `INSERT INTO orders
-          (id, created_at, customer_name, customer_company, customer_email, customer_phone, preferred_language, items_json, total_thb, status, payment_provider)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          (id, created_at, customer_name, customer_company, customer_email, customer_phone, preferred_language, items_json, total_thb, currency, total_usd, status, payment_provider)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       )
       .run(
         order.id,
@@ -84,6 +102,8 @@ export class SqliteOrderStore implements OrderStore {
         order.customer.preferredLanguage,
         JSON.stringify(order.items),
         order.totalThb,
+        order.currency,
+        order.totalUsd,
         order.status,
         order.paymentProvider,
       );

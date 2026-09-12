@@ -17,3 +17,5 @@ Shalom_Thailand_*.xlsx
 # Claude Code local tooling config, not part of the website itself.
 .claude/
 skills-lock.json
+.vercel
+.env*

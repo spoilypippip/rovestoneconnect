@@ -2,16 +2,7 @@ import { notFound } from "next/navigation";
 import Container from "@/components/Container";
 import { getOrderStore } from "@/lib/orders";
 import { paymentProvider } from "@/lib/payments";
-import { getItem } from "@/content/catalog";
-import Amount from "@/components/Amount";
-
-// Orders only ever store THB (the currency actually charged). The USD figure
-// shown alongside it is looked up from the current catalog by item id, purely
-// for display - null if that item is no longer in the catalog.
-function unitUsd(itemId: string): number | null {
-  const item = getItem(itemId);
-  return item?.pricing.mode === "fixed" ? item.pricing.usd : null;
-}
+import { formatCharged } from "@/lib/currency";
 
 function lineDeepLink(orderId: string, itemNames: string[]): string | null {
   // TODO: set LINE_OA_ID (the "@..." handle from the LINE Official
@@ -53,11 +44,6 @@ export default async function OrderConfirmationPage({
     order.items.map((i) => i.name),
   );
 
-  const totalUsd = order.items.reduce<number | null>((sum, item) => {
-    const usd = unitUsd(item.itemId);
-    return sum == null || usd == null ? null : sum + usd * item.qty;
-  }, 0);
-
   return (
     <section className="py-20 md:py-32">
       <Container className="mx-auto max-w-xl text-center">
@@ -75,26 +61,24 @@ export default async function OrderConfirmationPage({
         </p>
 
         <div className="mt-10 divide-y divide-line border-y border-line text-left">
-          {order.items.map((item) => {
-            const usd = unitUsd(item.itemId);
-            return (
-              <div key={item.itemId} className="flex items-baseline justify-between gap-4 py-4">
-                <span className="text-sm text-charcoal">
-                  {item.name} × {item.qty}
-                </span>
-                <span className="text-sm text-ink">
-                  <Amount
-                    thb={item.unitPriceThb * item.qty}
-                    usd={usd != null ? usd * item.qty : null}
-                  />
-                </span>
-              </div>
-            );
-          })}
+          {order.items.map((item) => (
+            <div key={item.itemId} className="flex items-baseline justify-between gap-4 py-4">
+              <span className="text-sm text-charcoal">
+                {item.name} × {item.qty}
+              </span>
+              <span className="text-sm text-ink">
+                {formatCharged(
+                  order.currency,
+                  item.unitPriceThb * item.qty,
+                  item.unitPriceUsd != null ? item.unitPriceUsd * item.qty : null,
+                )}
+              </span>
+            </div>
+          ))}
           <div className="flex items-baseline justify-between gap-4 py-4">
             <span className="text-sm text-ink">Total</span>
             <span className="text-base text-ink">
-              <Amount thb={order.totalThb} usd={totalUsd} />
+              {formatCharged(order.currency, order.totalThb, order.totalUsd)}
             </span>
           </div>
         </div>

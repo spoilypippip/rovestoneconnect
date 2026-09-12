@@ -1,5 +1,6 @@
 import type { Order } from "@/lib/orders/types";
 import type { NotificationProvider, QuoteRequestDetails } from "./types";
+import { formatCharged } from "@/lib/currency";
 
 // TODO: set RESEND_API_KEY, NOTIFICATION_EMAIL_FROM, and
 // NOTIFICATION_EMAIL_TO before launch. Until then this logs to the
@@ -34,7 +35,10 @@ async function send(subject: string, text: string) {
 export class EmailNotificationProvider implements NotificationProvider {
   async notifyNewOrder(order: Order): Promise<void> {
     const itemLines = order.items
-      .map((item) => `  - ${item.name} x${item.qty} (฿${item.unitPriceThb.toLocaleString("en-US")} each)`)
+      .map(
+        (item) =>
+          `  - ${item.name} x${item.qty} (${formatCharged(order.currency, item.unitPriceThb, item.unitPriceUsd)} each)`,
+      )
       .join("\n");
 
     await send(
@@ -44,7 +48,7 @@ export class EmailNotificationProvider implements NotificationProvider {
         `Status: ${order.status}`,
         `Customer: ${order.customer.name} <${order.customer.email}>, ${order.customer.phone}`,
         order.customer.company ? `Company: ${order.customer.company}` : null,
-        `Total: ฿${order.totalThb.toLocaleString("en-US")}`,
+        `Total: ${formatCharged(order.currency, order.totalThb, order.totalUsd)}`,
         "Items:",
         itemLines,
       ]

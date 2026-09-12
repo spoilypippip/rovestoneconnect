@@ -21,6 +21,8 @@ type OrderRow = {
   customer_phone: string;
   preferred_language: Order["customer"]["preferredLanguage"];
   total_thb: number;
+  currency: Order["currency"];
+  total_usd: number | null;
   status: OrderStatus;
   payment_provider: string;
 };
@@ -30,6 +32,7 @@ type OrderItemRow = {
   category_slug: string;
   name: string;
   unit_price_thb: number;
+  unit_price_usd: number | null;
   qty: number;
 };
 
@@ -46,6 +49,8 @@ function toOrder(row: OrderRow, items: OrderItem[]): Order {
     },
     items,
     totalThb: row.total_thb,
+    currency: row.currency ?? "THB",
+    totalUsd: row.total_usd ?? null,
     status: row.status,
     paymentProvider: row.payment_provider,
   };
@@ -57,6 +62,7 @@ function toOrderItems(rows: OrderItemRow[]): OrderItem[] {
     categorySlug: r.category_slug,
     name: r.name,
     unitPriceThb: r.unit_price_thb,
+    unitPriceUsd: r.unit_price_usd ?? null,
     qty: r.qty,
   }));
 }
@@ -79,6 +85,8 @@ export class SupabaseOrderStore implements OrderStore {
         customer_phone: input.customer.phone,
         preferred_language: input.customer.preferredLanguage,
         total_thb: input.totalThb,
+        currency: input.currency,
+        total_usd: input.totalUsd,
         status: "pending_payment",
         payment_provider: input.paymentProvider,
       })
@@ -96,6 +104,7 @@ export class SupabaseOrderStore implements OrderStore {
         category_slug: item.categorySlug,
         name: item.name,
         unit_price_thb: item.unitPriceThb,
+        unit_price_usd: item.unitPriceUsd,
         qty: item.qty,
       })),
     );

@@ -2,9 +2,10 @@ import Stripe from "stripe";
 import type { Order } from "@/lib/orders/types";
 import type { PaymentEvent, PaymentProvider } from "./types";
 
-// THB has two decimal places (satang) in Stripe's API, same as most
-// currencies - only a short zero-decimal list (JPY, KRW, ...) differs.
-const THB_TO_SATANG = 100;
+// THB and USD both have two decimal places (satang, cents) in Stripe's API,
+// same as most currencies - only a short zero-decimal list (JPY, KRW, ...)
+// differs.
+const TO_MINOR_UNIT = 100;
 
 function siteUrl(): string {
   if (process.env.SITE_URL) return process.env.SITE_URL;
@@ -52,14 +53,20 @@ export class StripeCheckoutProvider implements PaymentProvider {
       client_reference_id: order.id,
       metadata: { orderId: order.id },
       customer_email: order.customer.email,
-      line_items: order.items.map((item) => ({
-        quantity: item.qty,
-        price_data: {
-          currency: "thb",
-          unit_amount: Math.round(item.unitPriceThb * THB_TO_SATANG),
-          product_data: { name: item.name },
-        },
-      })),
+      line_items: order.items.map((item) => {
+        const unitPrice = order.currency === "USD" ? item.unitPriceUsd : item.unitPriceThb;
+        if (unitPrice == null) {
+          throw new Error(`Item ${item.itemId} has no ${order.currency} price recorded on this order.`);
+        }
+        return {
+          quantity: item.qty,
+          price_data: {
+            currency: order.currency.toLowerCase(),
+            unit_amount: Math.round(unitPrice * TO_MINOR_UNIT),
+            product_data: { name: item.name },
+          },
+        };
+      }),
       success_url: `${siteUrl()}/order/${order.id}/confirmation?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl()}/checkout`,
     });

@@ -9,6 +9,7 @@ import { createOrder, confirmManualPayment, type CreateOrderResult } from "./act
 import type { OrderCustomer } from "@/lib/orders/types";
 import { getItem } from "@/content/catalog";
 import Amount from "@/components/Amount";
+import { useCurrency } from "@/components/CurrencyProvider";
 
 function unitUsd(id: string): number | null {
   const item = getItem(id);
@@ -18,6 +19,7 @@ function unitUsd(id: string): number | null {
 export default function CheckoutPage() {
   const router = useRouter();
   const { lines, subtotalThb, clear } = useCart();
+  const { currency } = useCurrency();
   const subtotalUsd = lines.reduce<number | null>((sum, line) => {
     const usd = unitUsd(line.id);
     return sum == null || usd == null ? null : sum + usd * line.qty;
@@ -50,6 +52,7 @@ export default function CheckoutPage() {
     const result = await createOrder(
       customer,
       lines.map((l) => ({ id: l.id, qty: l.qty })),
+      currency,
     );
     setSubmitting(false);
 
