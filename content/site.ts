@@ -54,8 +54,14 @@ export const testimonials = [
   {
     quote:
       "I don't even know if I deserve such a wonderful surprise!! It's been such a long time since I last went to Thailand, so getting everything ready for the trip hasn't been easy. But thanks to you, I already feel so much more relaxed even before the trip has started!!",
-    name: "Shin SoYoon",
-    role: "Traveller",
+    name: "South Korean",
+    role: "",
+  },
+  {
+    quote:
+      "Thank you so much for taking care of everything and thinking of us. I'm truly touched and really appreciate it.",
+    name: "South Korean",
+    role: "",
   },
 ];
 
