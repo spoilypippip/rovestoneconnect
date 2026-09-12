@@ -1,10 +1,7 @@
 import type { CatalogItem } from "@/content/catalog";
 import { itemCopy } from "@/content/catalog-copy";
 import TierCardAction from "@/components/cart/TierCardAction";
-
-function formatTHB(n: number) {
-  return `฿${n.toLocaleString("en-US")}`;
-}
+import Amount from "@/components/Amount";
 
 export default function TierCard({
   item,
@@ -41,10 +38,13 @@ export default function TierCard({
 
       <div className="mt-6 flex items-baseline justify-between gap-4">
         {item.pricing.mode === "fixed" ? (
-          <span className="text-base">{formatTHB(item.pricing.thb)}</span>
+          <span className="text-base">
+            <Amount thb={item.pricing.thb} usd={item.pricing.usd} />
+          </span>
         ) : (
           <span className="text-base">
-            {formatTHB(item.pricing.thbLow)}–{formatTHB(item.pricing.thbHigh)}
+            <Amount thb={item.pricing.thbLow} usd={item.pricing.usdLow} />–
+            <Amount thb={item.pricing.thbHigh} usd={item.pricing.usdHigh} />
           </span>
         )}
         <span

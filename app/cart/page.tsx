@@ -3,13 +3,20 @@
 import Link from "next/link";
 import Container from "@/components/Container";
 import { useCart } from "@/components/cart/CartProvider";
+import { getItem } from "@/content/catalog";
+import Amount from "@/components/Amount";
 
-function formatTHB(n: number) {
-  return `฿${n.toLocaleString("en-US")}`;
+function unitUsd(id: string): number | null {
+  const item = getItem(id);
+  return item?.pricing.mode === "fixed" ? item.pricing.usd : null;
 }
 
 export default function CartPage() {
   const { lines, setQty, removeItem, subtotalThb } = useCart();
+  const subtotalUsd = lines.reduce<number | null>((sum, line) => {
+    const usd = unitUsd(line.id);
+    return sum == null || usd == null ? null : sum + usd * line.qty;
+  }, 0);
 
   if (lines.length === 0) {
     return (
@@ -44,7 +51,7 @@ export default function CartPage() {
                 </p>
                 <p className="mt-1 text-base text-ink">{line.name}</p>
                 <p className="mt-1 text-sm text-charcoal">
-                  {formatTHB(line.unitPriceThb)} each
+                  <Amount thb={line.unitPriceThb} usd={unitUsd(line.id)} /> each
                 </p>
 
                 <div className="mt-3 flex items-center gap-3">
@@ -74,7 +81,10 @@ export default function CartPage() {
               </div>
 
               <p className="shrink-0 text-base text-ink">
-                {formatTHB(line.unitPriceThb * line.qty)}
+                <Amount
+                  thb={line.unitPriceThb * line.qty}
+                  usd={unitUsd(line.id) != null ? unitUsd(line.id)! * line.qty : null}
+                />
               </p>
             </div>
           ))}
@@ -82,7 +92,9 @@ export default function CartPage() {
 
         <div className="mt-8 flex items-center justify-between border-t border-line pt-6">
           <span className="text-base text-ink">Subtotal</span>
-          <span className="text-lg text-ink">{formatTHB(subtotalThb)}</span>
+          <span className="text-lg text-ink">
+            <Amount thb={subtotalThb} usd={subtotalUsd} />
+          </span>
         </div>
 
         <Link

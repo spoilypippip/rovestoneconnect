@@ -7,14 +7,21 @@ import Container from "@/components/Container";
 import { useCart } from "@/components/cart/CartProvider";
 import { createOrder, confirmManualPayment, type CreateOrderResult } from "./actions";
 import type { OrderCustomer } from "@/lib/orders/types";
+import { getItem } from "@/content/catalog";
+import Amount from "@/components/Amount";
 
-function formatTHB(n: number) {
-  return `฿${n.toLocaleString("en-US")}`;
+function unitUsd(id: string): number | null {
+  const item = getItem(id);
+  return item?.pricing.mode === "fixed" ? item.pricing.usd : null;
 }
 
 export default function CheckoutPage() {
   const router = useRouter();
   const { lines, subtotalThb, clear } = useCart();
+  const subtotalUsd = lines.reduce<number | null>((sum, line) => {
+    const usd = unitUsd(line.id);
+    return sum == null || usd == null ? null : sum + usd * line.qty;
+  }, 0);
   const [session, setSession] = useState<Extract<CreateOrderResult, { ok: true }> | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -99,13 +106,20 @@ export default function CheckoutPage() {
                 <span className="text-sm text-charcoal">
                   {line.name} × {line.qty}
                 </span>
-                <span className="text-sm text-ink">{formatTHB(line.unitPriceThb * line.qty)}</span>
+                <span className="text-sm text-ink">
+                  <Amount
+                    thb={line.unitPriceThb * line.qty}
+                    usd={unitUsd(line.id) != null ? unitUsd(line.id)! * line.qty : null}
+                  />
+                </span>
               </div>
             ))}
           </div>
           <div className="mt-4 flex items-baseline justify-between border-t border-line pt-4">
             <span className="text-sm text-ink">Total</span>
-            <span className="text-base text-ink">{formatTHB(subtotalThb)}</span>
+            <span className="text-base text-ink">
+              <Amount thb={subtotalThb} usd={subtotalUsd} />
+            </span>
           </div>
         </div>
 

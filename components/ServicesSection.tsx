@@ -4,12 +4,13 @@ import Reveal from "./Reveal";
 import { catalog } from "@/content/catalog";
 import { categoryCopy } from "@/content/catalog-copy";
 import { primaryCta } from "@/content/site";
+import Amount from "@/components/Amount";
 
 function fromPrice(category: (typeof catalog.categories)[number]) {
-  const prices = category.items
+  const fixedPrices = category.items
     .filter((item) => !item.isAddon && item.pricing.mode === "fixed")
-    .map((item) => (item.pricing as { thb: number }).thb);
-  return Math.min(...prices);
+    .map((item) => item.pricing as { mode: "fixed"; thb: number; usd: number | null });
+  return fixedPrices.reduce((cheapest, price) => (price.thb < cheapest.thb ? price : cheapest));
 }
 
 export default function ServicesSection() {
@@ -27,25 +28,28 @@ export default function ServicesSection() {
         </Reveal>
 
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {catalog.categories.map((category, i) => (
-            <Reveal key={category.slug} delay={i * 40}>
-              <Link
-                href={`/services/${category.slug}`}
-                className="group flex h-full flex-col border border-line p-8 transition-colors hover:border-brass"
-              >
-                <h3 className="text-xl text-ink">{category.name}</h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-charcoal">
-                  {categoryCopy[category.slug]?.tagline}
-                </p>
-                <p className="mt-6 text-sm text-ink">
-                  From ฿{fromPrice(category).toLocaleString("en-US")}
-                </p>
-                <span className="mt-4 text-sm text-brass transition-colors group-hover:text-ink">
-                  View tiers →
-                </span>
-              </Link>
-            </Reveal>
-          ))}
+          {catalog.categories.map((category, i) => {
+            const cheapest = fromPrice(category);
+            return (
+              <Reveal key={category.slug} delay={i * 40}>
+                <Link
+                  href={`/services/${category.slug}`}
+                  className="group flex h-full flex-col border border-line p-8 transition-colors hover:border-brass"
+                >
+                  <h3 className="text-xl text-ink">{category.name}</h3>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-charcoal">
+                    {categoryCopy[category.slug]?.tagline}
+                  </p>
+                  <p className="mt-6 text-sm text-ink">
+                    From <Amount thb={cheapest.thb} usd={cheapest.usd} />
+                  </p>
+                  <span className="mt-4 text-sm text-brass transition-colors group-hover:text-ink">
+                    View tiers →
+                  </span>
+                </Link>
+              </Reveal>
+            );
+          })}
         </div>
 
         <div className="mt-10">

@@ -3,6 +3,7 @@ import { Fraunces, Inter } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/components/cart/CartProvider";
+import { CurrencyProvider } from "@/components/CurrencyProvider";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -38,11 +39,13 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <CartProvider>
-          <Nav />
-          <main id="main">{children}</main>
-          <Footer />
-        </CartProvider>
+        <CurrencyProvider>
+          <CartProvider>
+            <Nav />
+            <main id="main">{children}</main>
+            <Footer />
+          </CartProvider>
+        </CurrencyProvider>
       </body>
     </html>
   );
