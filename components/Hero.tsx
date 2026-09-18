@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Container from "./Container";
-import { hero, primaryCta } from "@/content/site";
+import { hero } from "@/content/site";
 
 export default function Hero() {
   return (
@@ -33,12 +33,20 @@ export default function Hero() {
         <p className="mt-6 max-w-xl text-base leading-relaxed text-paper/80 md:text-lg">
           {hero.subhead}
         </p>
-        <Link
-          href="/#contact"
-          className="mt-9 inline-block border border-brass px-6 py-3 text-sm text-paper transition-colors hover:bg-brass"
-        >
-          {primaryCta}
-        </Link>
+        <div className="mt-9 flex flex-wrap gap-4">
+          <Link
+            href="/services"
+            className="inline-block border border-brass bg-brass px-6 py-3 text-sm text-ink transition-colors hover:bg-transparent hover:text-paper"
+          >
+            {hero.primaryCta}
+          </Link>
+          <Link
+            href="/#contact"
+            className="inline-block border border-paper/40 px-6 py-3 text-sm text-paper transition-colors hover:border-brass hover:bg-brass"
+          >
+            {hero.secondaryCta}
+          </Link>
+        </div>
       </Container>
     </section>
   );

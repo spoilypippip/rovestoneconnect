@@ -10,9 +10,11 @@ export const primaryCta = "Request a Consultation";
 
 export const hero = {
   eyebrow: "Destination Management · Pattaya",
-  headline: "Your trusted partner for business in Thailand.",
+  headline: "Your trusted local partner in Thailand.",
   subhead:
-    "RoveStone Connect provides independent advisory and on-the-ground support for MICE programs, business travel, and market entry, from local specialists who know how Thailand actually works.",
+    "Local knowledge, trusted connections and on-the-ground support for individuals and organizations navigating Thailand.",
+  primaryCta: "Find the right support",
+  secondaryCta: "Talk to us",
 };
 
 export const processSteps = [
