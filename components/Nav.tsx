@@ -2,6 +2,7 @@ import Link from "next/link";
 import Container from "./Container";
 import CartNavLink from "./cart/CartNavLink";
 import CurrencyToggle from "./CurrencyToggle";
+import AccountMenu from "./AccountMenu";
 import { navLinks, primaryCta, siteName } from "@/content/site";
 
 export default function Nav() {
@@ -28,6 +29,7 @@ export default function Nav() {
         </nav>
 
         <div className="flex items-center gap-5">
+          <AccountMenu />
           <CurrencyToggle />
           <CartNavLink />
 

@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/components/cart/CartProvider";
 import { CurrencyProvider } from "@/components/CurrencyProvider";
+import { AuthProvider } from "@/components/AuthProvider";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -39,13 +40,15 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <CurrencyProvider>
-          <CartProvider>
-            <Nav />
-            <main id="main">{children}</main>
-            <Footer />
-          </CartProvider>
-        </CurrencyProvider>
+        <AuthProvider>
+          <CurrencyProvider>
+            <CartProvider>
+              <Nav />
+              <main id="main">{children}</main>
+              <Footer />
+            </CartProvider>
+          </CurrencyProvider>
+        </AuthProvider>
       </body>
     </html>
   );

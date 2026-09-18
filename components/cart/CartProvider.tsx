@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { useAuth } from "@/components/AuthProvider";
 
 export type CartLine = {
   id: string; // catalog item id
@@ -22,26 +23,33 @@ type CartContextValue = {
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
-const STORAGE_KEY = "rovestone-cart";
+// Keyed per signed-in user (falling back to "guest") so a shared browser
+// never shows one person's leftover cart to whoever's signed in next.
+const STORAGE_PREFIX = "rovestone-cart";
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
+  const { user, loading: authLoading } = useAuth();
+  const identityKey = user?.id ?? "guest";
+
   const [lines, setLines] = useState<CartLine[]>([]);
-  const [hydrated, setHydrated] = useState(false);
+  const [hydratedKey, setHydratedKey] = useState<string | null>(null);
 
   useEffect(() => {
+    if (authLoading) return;
     try {
-      const raw = window.localStorage.getItem(STORAGE_KEY);
-      if (raw) setLines(JSON.parse(raw));
+      const raw = window.localStorage.getItem(`${STORAGE_PREFIX}:${identityKey}`);
+      setLines(raw ? JSON.parse(raw) : []);
     } catch {
       // Corrupt or inaccessible storage: start with an empty cart.
+      setLines([]);
     }
-    setHydrated(true);
-  }, []);
+    setHydratedKey(identityKey);
+  }, [identityKey, authLoading]);
 
   useEffect(() => {
-    if (!hydrated) return;
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(lines));
-  }, [lines, hydrated]);
+    if (hydratedKey !== identityKey) return;
+    window.localStorage.setItem(`${STORAGE_PREFIX}:${identityKey}`, JSON.stringify(lines));
+  }, [lines, hydratedKey, identityKey]);
 
   const value = useMemo<CartContextValue>(() => {
     const addItem: CartContextValue["addItem"] = (line, qty = 1) => {
