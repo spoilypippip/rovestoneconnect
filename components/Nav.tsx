@@ -6,7 +6,7 @@ import { navLinks, primaryCta, siteName } from "@/content/site";
 
 export default function Nav() {
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-paper/90 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-line/70 bg-paper/70 backdrop-blur">
       <Container className="flex h-[72px] items-center justify-between">
         <Link
           href="/"

@@ -5,7 +5,7 @@ import { hero } from "@/content/site";
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[640px] items-end overflow-hidden bg-ink md:min-h-[760px]">
+    <section className="relative -mt-[72px] flex min-h-[712px] items-center overflow-hidden bg-ink md:min-h-[832px]">
       <Image
         src="/images/hero-banner.jpeg"
         alt="Traditional long-tail boat resting on calm emerald bay waters, Thailand"
