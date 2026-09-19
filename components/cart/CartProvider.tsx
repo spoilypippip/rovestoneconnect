@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useAuth } from "@/components/AuthProvider";
+import { getCategory } from "@/content/catalog";
 
 export type CartLine = {
   id: string; // catalog item id
@@ -38,7 +39,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     if (authLoading) return;
     try {
       const raw = window.localStorage.getItem(`${STORAGE_PREFIX}:${identityKey}`);
-      setLines(raw ? JSON.parse(raw) : []);
+      const parsed: CartLine[] = raw ? JSON.parse(raw) : [];
+      // Silently drop lines from a category that's since been hidden (e.g.
+      // added before a temporary sales pause) - checkout would reject them
+      // anyway, this just keeps the cart from showing something unbuyable.
+      setLines(parsed.filter((line) => getCategory(line.categorySlug)?.visibility === "active"));
     } catch {
       // Corrupt or inaccessible storage: start with an empty cart.
       setLines([]);
