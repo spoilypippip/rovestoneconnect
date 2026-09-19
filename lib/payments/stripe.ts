@@ -54,7 +54,12 @@ export class StripeCheckoutProvider implements PaymentProvider {
       metadata: { orderId: order.id },
       customer_email: order.customer.email,
       line_items: order.items.map((item) => {
-        const unitPrice = order.currency === "USD" ? item.unitPriceUsd : item.unitPriceThb;
+        const unitPrice =
+          order.currency === "USD"
+            ? item.unitPriceUsd
+            : order.currency === "EUR"
+              ? item.unitPriceEur
+              : item.unitPriceThb;
         if (unitPrice == null) {
           throw new Error(`Item ${item.itemId} has no ${order.currency} price recorded on this order.`);
         }

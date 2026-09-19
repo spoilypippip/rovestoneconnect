@@ -6,7 +6,8 @@ import { getOrderStore } from "@/lib/orders";
 import type { OrderCustomer, OrderItem } from "@/lib/orders/types";
 import { paymentProvider, activePaymentProviderName, manualTransferDetails } from "@/lib/payments";
 import { notificationProvider } from "@/lib/notifications";
-import type { Currency } from "@/lib/currency";
+import { usdToEur, type Currency } from "@/lib/currency";
+import { getEurPerUsdRate } from "@/lib/exchange-rate";
 
 export type CheckoutLineInput = { id: string; qty: number };
 
@@ -32,10 +33,17 @@ export async function createOrder(
     return { ok: false, error: "Name, email, and phone are required." };
   }
   // Manual transfer (PromptPay / Thai bank account) only ever settles in
-  // THB - USD checkout requires the card (Stripe) provider.
-  if (currency === "USD" && activePaymentProviderName !== "stripe") {
-    return { ok: false, error: "USD checkout isn't available right now - please switch to THB, or contact us directly." };
+  // THB - USD/EUR checkout requires the card (Stripe) provider.
+  if ((currency === "USD" || currency === "EUR") && activePaymentProviderName !== "stripe") {
+    return { ok: false, error: "Card checkout isn't available right now - please contact us directly." };
   }
+
+  // Resolved ONCE per order and reused for every line below - this is the
+  // rate that gets frozen onto the order. Nothing downstream (confirmation
+  // page, email/LINE notifications) may call usdToEur/getEurPerUsdRate
+  // again for this order; they only ever read the persisted unitPriceEur/
+  // totalEur values computed here.
+  const eurPerUsdRate = currency === "EUR" ? await getEurPerUsdRate() : null;
 
   // Never trust client-submitted prices: every line is recomputed here
   // from the canonical catalog by id.
@@ -45,8 +53,18 @@ export async function createOrder(
     if (!found || found.item.pricing.mode !== "fixed") {
       return { ok: false, error: `One of the items in your cart is no longer available for instant purchase.` };
     }
-    if (currency === "USD" && found.item.pricing.usd == null) {
-      return { ok: false, error: `One of the items in your cart has no USD price - please switch to THB.` };
+    // Trust boundary: a hidden category must be unpurchasable even via a
+    // hand-crafted request that never touched the (already-filtered) UI.
+    if (found.category.visibility !== "active") {
+      return { ok: false, error: `One of the items in your cart is no longer available for instant purchase.` };
+    }
+    // EUR is derived from the USD price (see lib/currency.ts), so it needs
+    // the item to have one exactly as much as USD checkout does.
+    if ((currency === "USD" || currency === "EUR") && found.item.pricing.usd == null) {
+      return {
+        ok: false,
+        error: `One of the items in your cart has no USD price on record, so USD/EUR checkout isn't available for it - please contact us directly.`,
+      };
     }
     const qty = Math.max(1, Math.min(10, Math.floor(line.qty)));
     items.push({
@@ -55,6 +73,10 @@ export async function createOrder(
       name: itemCopy[found.item.id]?.name ?? found.item.tierLabel,
       unitPriceThb: found.item.pricing.thb,
       unitPriceUsd: found.item.pricing.usd,
+      unitPriceEur:
+        eurPerUsdRate != null && found.item.pricing.usd != null
+          ? usdToEur(found.item.pricing.usd, eurPerUsdRate)
+          : null,
       qty,
     });
   }
@@ -62,6 +84,9 @@ export async function createOrder(
   const totalThb = items.reduce((sum, i) => sum + i.unitPriceThb * i.qty, 0);
   const totalUsd = items.every((i) => i.unitPriceUsd != null)
     ? items.reduce((sum, i) => sum + i.unitPriceUsd! * i.qty, 0)
+    : null;
+  const totalEur = items.every((i) => i.unitPriceEur != null)
+    ? items.reduce((sum, i) => sum + i.unitPriceEur! * i.qty, 0)
     : null;
 
   const orderStore = await getOrderStore();
@@ -71,6 +96,7 @@ export async function createOrder(
     totalThb,
     currency,
     totalUsd,
+    totalEur,
     paymentProvider: activePaymentProviderName,
   });
 
