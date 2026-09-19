@@ -7,9 +7,10 @@ import { categoryCopy } from "@/content/catalog-copy";
 
 const FEATURED_CATEGORY_SLUG = "local-information";
 const FEATURED_TIER_IDS = [
+  "local-information--30-day",
   "local-information--7-day",
   "local-information--14-day",
-  "local-information--30-day",
+  "local-information--1-year",
 ];
 
 export default function FeaturedService() {
@@ -33,23 +34,41 @@ export default function FeaturedService() {
           </p>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="-mx-6 mt-14 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {tiers.map((item, i) => (
-            <Reveal key={item.id} delay={i * 60}>
-              <TierCard item={item} categorySlug={category.slug} categoryName={category.name} />
+            <Reveal
+              key={item.id}
+              delay={i * 60}
+              className="w-[78%] shrink-0 snap-start sm:w-[55%] lg:w-[30%]"
+            >
+              {item.recommended ? (
+                <TierCard item={item} categorySlug={category.slug} categoryName={category.name} />
+              ) : (
+                // Equal height across the non-recommended tiers only, scoped
+                // to this carousel (TierCard itself takes no className, and
+                // must stay auto-height on /services/[categorySlug] where it
+                // already stretches via CSS Grid). flex + min-h stretches
+                // TierCard's own border box to fill it, unlike a plain
+                // min-h wrapper which would just leave dead space below the
+                // card. 320px ~= padding (48px) + title (32px) + the
+                // longest of the three descriptions, "Annual Partnership"
+                // at 122 chars, wrapping to ~5 lines at the narrowest
+                // (mobile) card width (~126px) + price row (48px) + button
+                // (~69px) - an estimate, not measured in a real browser.
+                <div className="flex min-h-[320px]">
+                  <TierCard item={item} categorySlug={category.slug} categoryName={category.name} />
+                </div>
+              )}
             </Reveal>
           ))}
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center gap-6">
+        <div className="mt-10">
           <Link
-            href={`/services/${category.slug}`}
+            href="/#contact"
             className="inline-block border border-brass px-6 py-3 text-sm text-ink transition-colors hover:bg-brass hover:text-paper"
           >
-            See all Local Information tiers
-          </Link>
-          <Link href="/services" className="text-sm text-brass transition-colors hover:text-ink">
-            View all services →
+            Talk to our team
           </Link>
         </div>
       </Container>
