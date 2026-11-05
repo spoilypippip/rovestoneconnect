@@ -13,11 +13,7 @@ export default function Footer() {
       <Container className="grid grid-cols-1 gap-10 py-16 md:grid-cols-3">
         <div>
           <p className="font-display text-lg">{siteName}</p>
-          <p className="mt-4 text-sm text-paper/70">
-            {contactInfo.email}
-            <br />
-            {contactInfo.phone}
-          </p>
+          <p className="mt-4 text-sm text-paper/70">{contactInfo.email}</p>
         </div>
 
         <nav aria-label="Footer" className="flex flex-col gap-3">
