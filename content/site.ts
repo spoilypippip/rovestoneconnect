@@ -162,6 +162,6 @@ export const footerLinks = [
 ];
 
 export const contactInfo = {
-  email: "consult@rovestoneconnect.com",
+  email: "connect@rovestone.co",
   phone: "+66 2 000 0000",
 };

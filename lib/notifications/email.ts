@@ -6,6 +6,7 @@ import type {
   QuoteRequestDetails,
 } from "./types";
 import { formatCharged } from "@/lib/currency";
+import { EMAIL_PATTERN } from "@/lib/validation/contact";
 
 // What kind of alert a log line is about. Safe to log anywhere: it says
 // nothing about the person the alert concerns.
@@ -38,11 +39,18 @@ function reportUnconfigured(kind: NotificationKind, ref: string, subject: string
 // delivered, and this says so in its return value rather than failing
 // silently - the contact form shows the customer an error instead of a
 // false "thank you".
+/**
+ * @param replyTo Goes into Resend's `reply_to`, so replying to the alert
+ *   reaches the customer. Re-checked here because it arrives from a public
+ *   form and ends up in an outgoing header - a malformed one is left off
+ *   rather than allowed to fail the send.
+ */
 async function send(
   kind: NotificationKind,
   ref: string,
   subject: string,
   text: string,
+  replyTo?: string,
 ): Promise<NotificationResult> {
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.NOTIFICATION_EMAIL_FROM;
@@ -53,6 +61,11 @@ async function send(
     return { ok: false, reason: "not-configured" };
   }
 
+  const safeReplyTo = replyTo && EMAIL_PATTERN.test(replyTo) ? replyTo : undefined;
+  if (replyTo && !safeReplyTo) {
+    console.error(`[notifications] Ignored a malformed reply-to address on ${kind} ${ref}.`);
+  }
+
   let res: Response;
   try {
     res = await fetch("https://api.resend.com/emails", {
@@ -61,7 +74,13 @@ async function send(
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ from, to, subject, text }),
+      body: JSON.stringify({
+        from,
+        to,
+        subject,
+        text,
+        ...(safeReplyTo ? { reply_to: safeReplyTo } : {}),
+      }),
     });
   } catch (error) {
     console.error(`[notifications] Resend request for ${kind} ${ref} failed: ${(error as Error).message}`);
@@ -119,6 +138,9 @@ export class EmailNotificationProvider implements NotificationProvider {
       ]
         .filter(Boolean)
         .join("\n"),
+      // Validated in app/quote-request/actions.ts before it gets here, so
+      // the team can just hit reply.
+      details.email,
     );
   }
 
@@ -139,6 +161,9 @@ export class EmailNotificationProvider implements NotificationProvider {
       ]
         .filter(Boolean)
         .join("\n"),
+      // Validated in app/contact/actions.ts before it gets here, so the
+      // team can just hit reply.
+      details.email,
     );
   }
 }
