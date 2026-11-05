@@ -159,6 +159,7 @@ export const footerLinks = [
   { label: "How We Work", href: "/#how-we-work" },
   { label: "About", href: "/#about" },
   { label: "Contact", href: "/contact" },
+  { label: "Privacy Policy", href: "/privacy" },
 ];
 
 export const contactInfo = {
