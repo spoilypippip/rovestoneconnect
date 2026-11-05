@@ -8,20 +8,16 @@ export default function Hero() {
     <section className="relative -mt-[72px] flex min-h-[712px] items-center overflow-hidden bg-ink md:min-h-[832px]">
       <Image
         src="/images/hero-banner.jpeg"
-        alt="Traditional long-tail boat resting on calm emerald bay waters, Thailand"
+        alt="Wat Arun lit against the Bangkok skyline at sunset, riverboats crossing the Chao Phraya"
         fill
         priority
         className="object-cover"
       />
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-[linear-gradient(155deg,var(--color-deepteal)_0%,var(--color-ink)_65%)] opacity-70 mix-blend-multiply"
-      />
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-ink/45 via-ink/15 to-transparent" />
       <div
         aria-hidden
         className="absolute inset-0 bg-[radial-gradient(circle_at_78%_22%,rgba(156,122,60,0.16),transparent_55%)]"
       />
-      <div aria-hidden className="absolute inset-0 bg-ink/25" />
 
       <Container className="relative py-16 md:py-24">
         <p className="text-xs font-medium uppercase tracking-[0.12em] text-paper/70">
