@@ -32,8 +32,16 @@ export default async function OrderConfirmationPage({
   // does. If so, this fills the gap by checking the session directly
   // rather than showing a stale "pending" status the webhook would
   // otherwise correct moments later.
-  if (order.status === "pending_payment" && stripeSessionId) {
-    const result = await paymentProvider.verifyPayment(stripeSessionId);
+  //
+  // The session id comes straight off the URL, so it is attacker-chosen:
+  // the order is passed in and verifyPayment only reports "paid" if the
+  // session really is this order's, for this order's amount and currency.
+  if (
+    order.status === "pending_payment" &&
+    stripeSessionId &&
+    order.paymentProvider === "stripe"
+  ) {
+    const result = await paymentProvider.verifyPayment(stripeSessionId, order);
     if (result.status !== "pending") {
       order = await orderStore.updateStatus(id, result.status === "paid" ? "paid" : "failed");
     }

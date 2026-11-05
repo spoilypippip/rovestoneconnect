@@ -111,12 +111,45 @@ export async function createOrder(
   };
 }
 
+// What a customer pressing "I've paid" is told when the order isn't in a
+// state that claim can apply to.
+const UNCONFIRMABLE_STATUS: Record<string, string> = {
+  paid: "This order is already paid - nothing left to confirm.",
+  failed: "This order's payment was marked failed. Please start a new order or contact us.",
+  cancelled: "This order was cancelled. Please start a new order or contact us.",
+};
+
+/**
+ * The customer telling us they've made the bank/PromptPay transfer. This is
+ * an unauthenticated claim about an order id, so it may only ever move a
+ * manual-transfer order from "pending_payment" to "pending_verification" -
+ * a human still checks the transfer landed before anything becomes "paid".
+ * It must never overwrite a Stripe order's status or a settled one.
+ */
 export async function confirmManualPayment(
   orderId: string,
 ): Promise<{ ok: true } | { ok: false; error: string }> {
   const orderStore = await getOrderStore();
   const order = await orderStore.get(orderId);
   if (!order) return { ok: false, error: "Order not found." };
+
+  if (order.paymentProvider !== "manual-transfer") {
+    return {
+      ok: false,
+      error: "This order is paid by card, so it can't be confirmed as a bank transfer.",
+    };
+  }
+
+  // Idempotent: a double-click or a resubmitted form must not notify staff
+  // about the same transfer twice.
+  if (order.status === "pending_verification") return { ok: true };
+
+  if (order.status !== "pending_payment") {
+    return {
+      ok: false,
+      error: UNCONFIRMABLE_STATUS[order.status] ?? "This order can no longer be confirmed.",
+    };
+  }
 
   const updated = await orderStore.updateStatus(orderId, "pending_verification");
   await notificationProvider.notifyNewOrder(updated);
