@@ -1,17 +1,37 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { catalog } from "@/content/catalog";
+import { getVisibleCategories } from "@/content/catalog";
+import { submitContactMessage } from "@/app/contact/actions";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "sent">("idle");
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus("submitting");
-    // UI-only submission for this deliverable: wire to a backend or
-    // email endpoint before launch.
-    window.setTimeout(() => setStatus("sent"), 500);
+    setError(null);
+
+    const form = new FormData(event.currentTarget);
+    const result = await submitContactMessage({
+      name: String(form.get("name") ?? ""),
+      company: String(form.get("company") ?? ""),
+      email: String(form.get("email") ?? ""),
+      phone: String(form.get("phone") ?? ""),
+      service: String(form.get("service") ?? ""),
+      message: String(form.get("message") ?? ""),
+      website: String(form.get("website") ?? ""),
+    });
+
+    if (!result.ok) {
+      setError(result.error);
+      setStatus("idle");
+      return;
+    }
+
+    // Only once the team has actually been notified.
+    setStatus("sent");
   }
 
   if (status === "sent") {
@@ -26,6 +46,8 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6" noValidate={false}>
+      {error && <p className="text-sm text-brass">{error}</p>}
+
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <Field label="Name" name="name" required />
         <Field label="Company" name="company" />
@@ -46,7 +68,7 @@ export default function ContactForm() {
           className="mt-2 w-full border border-line bg-paper px-4 py-3 text-sm text-ink focus-visible:outline-2 focus-visible:outline-brass"
         >
           <option value="">Select a service</option>
-          {catalog.categories.map((category) => (
+          {getVisibleCategories().map((category) => (
             <option key={category.slug} value={category.slug}>
               {category.name}
             </option>
@@ -65,6 +87,14 @@ export default function ContactForm() {
           rows={5}
           className="mt-2 w-full border border-line bg-paper px-4 py-3 text-sm text-ink focus-visible:outline-2 focus-visible:outline-brass"
         />
+      </div>
+
+      {/* Honeypot: hidden from people (and from screen readers and the tab
+          order), filled in by bots that complete every field they find.
+          A filled value makes the server drop the submission. */}
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
       <button

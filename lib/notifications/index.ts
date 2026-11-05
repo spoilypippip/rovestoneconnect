@@ -10,4 +10,9 @@ export const notificationProvider: NotificationProvider =
     ? new LineNotificationProvider()
     : new EmailNotificationProvider();
 
-export type { NotificationProvider, QuoteRequestDetails } from "./types";
+export type {
+  ContactMessageDetails,
+  NotificationProvider,
+  NotificationResult,
+  QuoteRequestDetails,
+} from "./types";
