@@ -8,6 +8,20 @@ import { paymentProvider, activePaymentProviderName, manualTransferDetails } fro
 import { notificationProvider } from "@/lib/notifications";
 import { usdToEur, type Currency } from "@/lib/currency";
 import { getEurPerUsdRate } from "@/lib/exchange-rate";
+import { createClient } from "@/lib/supabase/server";
+
+// Only signed-in customers can buy. The proxy redirects them to /login
+// first, but a Server Action is a public HTTP endpoint - it has to check
+// for itself rather than trust that they came through the UI.
+async function signedIn(): Promise<boolean> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  return user != null;
+}
+
+const SIGN_IN_REQUIRED = { ok: false, error: "Please sign in to continue." } as const;
 
 export type CheckoutLineInput = { id: string; qty: number };
 
@@ -26,6 +40,8 @@ export async function createOrder(
   cartLines: CheckoutLineInput[],
   currency: Currency,
 ): Promise<CreateOrderResult> {
+  if (!(await signedIn())) return SIGN_IN_REQUIRED;
+
   if (cartLines.length === 0) {
     return { ok: false, error: "Your cart is empty." };
   }
@@ -129,6 +145,8 @@ const UNCONFIRMABLE_STATUS: Record<string, string> = {
 export async function confirmManualPayment(
   orderId: string,
 ): Promise<{ ok: true } | { ok: false; error: string }> {
+  if (!(await signedIn())) return SIGN_IN_REQUIRED;
+
   const orderStore = await getOrderStore();
   const order = await orderStore.get(orderId);
   if (!order) return { ok: false, error: "Order not found." };

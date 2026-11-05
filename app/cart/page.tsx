@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import Container from "@/components/Container";
 import { useCart } from "@/components/cart/CartProvider";
 import { getItem } from "@/content/catalog";
@@ -12,7 +13,10 @@ function unitUsd(id: string): number | null {
 }
 
 export default function CartPage() {
-  const { lines, setQty, removeItem, subtotalThb } = useCart();
+  const { lines, setQty, removeItem, clear, subtotalThb } = useCart();
+  // Two taps rather than a browser confirm() dialog: the first turns the
+  // link into its own confirmation.
+  const [confirmingClear, setConfirmingClear] = useState(false);
   const subtotalUsd = lines.reduce<number | null>((sum, line) => {
     const usd = unitUsd(line.id);
     return sum == null || usd == null ? null : sum + usd * line.qty;
@@ -97,12 +101,28 @@ export default function CartPage() {
           </span>
         </div>
 
-        <Link
-          href="/checkout"
-          className="mt-8 inline-block border border-brass px-6 py-3 text-sm text-ink transition-colors hover:bg-brass hover:text-paper"
-        >
-          Proceed to Checkout
-        </Link>
+        <div className="mt-8 flex flex-wrap items-center gap-6">
+          <Link
+            href="/checkout"
+            className="inline-block border border-brass px-6 py-3 text-sm text-ink transition-colors hover:bg-brass hover:text-paper"
+          >
+            Proceed to Checkout
+          </Link>
+          <button
+            type="button"
+            onClick={() => {
+              if (!confirmingClear) {
+                setConfirmingClear(true);
+                return;
+              }
+              clear();
+              setConfirmingClear(false);
+            }}
+            className="text-sm text-charcoal underline decoration-line underline-offset-4 transition-colors hover:text-ink hover:decoration-brass"
+          >
+            {confirmingClear ? "Remove all items? Confirm" : "Clear cart"}
+          </button>
+        </div>
       </Container>
     </section>
   );

@@ -3,6 +3,7 @@ import Container from "@/components/Container";
 import { getOrderStore } from "@/lib/orders";
 import { paymentProvider } from "@/lib/payments";
 import { formatCharged } from "@/lib/currency";
+import ClearCartOnOrder from "./ClearCartOnOrder";
 
 function lineDeepLink(orderId: string, itemNames: string[]): string | null {
   // TODO: set LINE_OA_ID (the "@..." handle from the LINE Official
@@ -54,6 +55,12 @@ export default async function OrderConfirmationPage({
 
   return (
     <section className="py-20 md:py-32">
+      <ClearCartOnOrder
+        orderId={order.id}
+        status={order.status}
+        paymentProvider={order.paymentProvider}
+        hasStripeSession={Boolean(stripeSessionId)}
+      />
       <Container className="mx-auto max-w-xl text-center">
         <p className="text-xs font-medium uppercase tracking-[0.12em] text-charcoal">
           Order Confirmed
