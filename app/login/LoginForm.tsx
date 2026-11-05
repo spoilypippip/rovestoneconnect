@@ -2,8 +2,9 @@
 
 import { useState, type FormEvent } from "react";
 import { signInWithPassword, signInWithGoogle } from "@/app/auth/actions";
+import { safeNext } from "@/lib/auth/safe-next";
 
-export default function LoginForm() {
+export default function LoginForm({ next }: { next: string }) {
   const [status, setStatus] = useState<"idle" | "submitting">("idle");
   const [error, setError] = useState<string | null>(null);
 
@@ -25,12 +26,13 @@ export default function LoginForm() {
 
     // Hard reload so the client-side auth context (and cart, which keys off
     // the signed-in user) picks up the new session immediately.
-    window.location.href = "/";
+    window.location.href = safeNext(next);
   }
 
   return (
     <div className="space-y-6">
       <form action={signInWithGoogle}>
+        <input type="hidden" name="next" value={next} />
         <button
           type="submit"
           className="w-full border border-line px-6 py-3 text-sm text-ink transition-colors hover:border-brass"

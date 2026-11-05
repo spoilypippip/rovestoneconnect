@@ -3,8 +3,9 @@
 import { useState, type FormEvent } from "react";
 import { signUpWithPassword, signInWithGoogle } from "@/app/auth/actions";
 import { isPasswordValid, PASSWORD_REQUIREMENTS_MESSAGE } from "@/lib/auth/validate-password";
+import { safeNext } from "@/lib/auth/safe-next";
 
-export default function RegisterForm() {
+export default function RegisterForm({ next }: { next: string }) {
   const [status, setStatus] = useState<"idle" | "submitting" | "check-email">("idle");
   const [error, setError] = useState<string | null>(null);
 
@@ -29,7 +30,14 @@ export default function RegisterForm() {
     }
 
     setStatus("submitting");
-    const result = await signUpWithPassword({ firstName, lastName, email, password, confirmPassword });
+    const result = await signUpWithPassword({
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+      next,
+    });
     if (!result.ok) {
       setError(result.error);
       setStatus("idle");
@@ -43,7 +51,7 @@ export default function RegisterForm() {
 
     // Hard reload so the client-side auth context (and cart, which keys off
     // the signed-in user) picks up the new session immediately.
-    window.location.href = "/";
+    window.location.href = safeNext(next);
   }
 
   if (status === "check-email") {
@@ -59,6 +67,7 @@ export default function RegisterForm() {
   return (
     <div className="space-y-6">
       <form action={signInWithGoogle}>
+        <input type="hidden" name="next" value={next} />
         <button
           type="submit"
           className="w-full border border-line px-6 py-3 text-sm text-ink transition-colors hover:border-brass"

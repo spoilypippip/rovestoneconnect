@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Fraunces, Inter } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/components/cart/CartProvider";
+import PendingAddHandler from "@/components/cart/PendingAddHandler";
 import { CurrencyProvider } from "@/components/CurrencyProvider";
 import { AuthProvider } from "@/components/AuthProvider";
 import "./globals.css";
@@ -43,6 +45,11 @@ export default function RootLayout({
         <AuthProvider>
           <CurrencyProvider>
             <CartProvider>
+              {/* Reads ?add= from the URL, so it needs its own Suspense
+                  boundary to keep the pages around it prerenderable. */}
+              <Suspense fallback={null}>
+                <PendingAddHandler />
+              </Suspense>
               <Nav />
               <main id="main">{children}</main>
               <Footer />
