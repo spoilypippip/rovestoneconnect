@@ -3,9 +3,14 @@
 --
 -- The app only ever talks to these tables via the service-role key from
 -- server code (Server Actions / Server Components), never from the
--- browser, so Row Level Security is left off by default. If you later
--- add a customer-facing "my orders" page using the anon key from the
--- browser, enable RLS and add policies before doing that.
+-- browser. Row Level Security is enabled on both tables in the Supabase
+-- project with no policies attached, which is the correct setup for that:
+-- the service-role key bypasses RLS, so the server keeps working, while
+-- the anon/publishable key (which does not bypass it) can read nothing.
+-- If you later add a customer-facing "my orders" page that queries from
+-- the browser with the anon key, it will return zero rows until you add
+-- select policies scoping orders to the signed-in customer - add those
+-- first, don't disable RLS.
 
 create table if not exists orders (
   id uuid primary key default gen_random_uuid(),
