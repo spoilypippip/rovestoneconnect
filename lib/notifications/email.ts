@@ -37,7 +37,7 @@ export class EmailNotificationProvider implements NotificationProvider {
     const itemLines = order.items
       .map(
         (item) =>
-          `  - ${item.name} x${item.qty} (${formatCharged(order.currency, item.unitPriceThb, item.unitPriceUsd)} each)`,
+          `  - ${item.name} x${item.qty} (${formatCharged(order.currency, item.unitPriceThb, item.unitPriceUsd, item.unitPriceEur)} each)`,
       )
       .join("\n");
 
@@ -48,7 +48,7 @@ export class EmailNotificationProvider implements NotificationProvider {
         `Status: ${order.status}`,
         `Customer: ${order.customer.name} <${order.customer.email}>, ${order.customer.phone}`,
         order.customer.company ? `Company: ${order.customer.company}` : null,
-        `Total: ${formatCharged(order.currency, order.totalThb, order.totalUsd)}`,
+        `Total: ${formatCharged(order.currency, order.totalThb, order.totalUsd, order.totalEur)}`,
         "Items:",
         itemLines,
       ]

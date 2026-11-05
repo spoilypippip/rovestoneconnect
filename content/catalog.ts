@@ -25,6 +25,10 @@ export type CatalogCategory = {
   number: number;
   slug: string;
   name: string;
+  // "hidden" categories stay fully in the data (pricing, copy, everything)
+  // but are excluded from every public listing/route and rejected at
+  // checkout - a temporary sales pause, not a deletion.
+  visibility: "active" | "hidden";
   items: CatalogItem[];
 };
 
@@ -39,6 +43,10 @@ export const catalog = catalogData as Catalog;
 
 export function getCategory(slug: string): CatalogCategory | undefined {
   return catalog.categories.find((c) => c.slug === slug);
+}
+
+export function getVisibleCategories(): CatalogCategory[] {
+  return catalog.categories.filter((c) => c.visibility === "active");
 }
 
 export function getItem(id: string): CatalogItem | undefined {

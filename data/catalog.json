@@ -6,6 +6,7 @@
       "number": 1,
       "slug": "local-information",
       "name": "Local information",
+      "visibility": "active",
       "items": [
         {
           "id": "local-information--7-day",
@@ -78,6 +79,7 @@
       "number": 2,
       "slug": "translation",
       "name": "Translation",
+      "visibility": "hidden",
       "items": [
         {
           "id": "translation--7-day",
@@ -163,6 +165,7 @@
       "number": 3,
       "slug": "finding-trustworthy-services",
       "name": "Finding trustworthy services",
+      "visibility": "hidden",
       "items": [
         {
           "id": "finding-trustworthy-services--7-day",
@@ -250,6 +253,7 @@
       "number": 4,
       "slug": "accommodation-questions",
       "name": "Accommodation questions",
+      "visibility": "hidden",
       "items": [
         {
           "id": "accommodation-questions--7-day",
@@ -335,6 +339,7 @@
       "number": 5,
       "slug": "travel-arrangements",
       "name": "Travel arrangements",
+      "visibility": "hidden",
       "items": [
         {
           "id": "travel-arrangements--7-day",
@@ -433,6 +438,7 @@
       "number": 6,
       "slug": "relocation",
       "name": "Relocation",
+      "visibility": "hidden",
       "items": [
         {
           "id": "relocation--7-day",
@@ -531,6 +537,7 @@
       "number": 7,
       "slug": "local-culture",
       "name": "Local culture",
+      "visibility": "hidden",
       "items": [
         {
           "id": "local-culture--7-day",
@@ -603,6 +610,7 @@
       "number": 8,
       "slug": "business-support",
       "name": "Business support",
+      "visibility": "hidden",
       "items": [
         {
           "id": "business-support--7-day",
@@ -701,6 +709,7 @@
       "number": 9,
       "slug": "booking-coordination",
       "name": "Booking coordination",
+      "visibility": "hidden",
       "items": [
         {
           "id": "booking-coordination--7-day",
@@ -774,6 +783,7 @@
       "number": 10,
       "slug": "vip-concierge",
       "name": "VIP concierge",
+      "visibility": "hidden",
       "items": [
         {
           "id": "vip-concierge--7-day",
@@ -874,6 +884,7 @@
       "number": 11,
       "slug": "community-connection",
       "name": "Community connection",
+      "visibility": "hidden",
       "items": [
         {
           "id": "community-connection--7-day",
@@ -946,6 +957,7 @@
       "number": 12,
       "slug": "visa-extension-advisory",
       "name": "Visa extension advisory",
+      "visibility": "hidden",
       "items": [
         {
           "id": "visa-extension-advisory--7-day",

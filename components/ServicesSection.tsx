@@ -1,12 +1,12 @@
 import Link from "next/link";
 import Container from "./Container";
 import Reveal from "./Reveal";
-import { catalog } from "@/content/catalog";
+import { getVisibleCategories, type CatalogCategory } from "@/content/catalog";
 import { categoryCopy } from "@/content/catalog-copy";
 import { primaryCta } from "@/content/site";
 import Amount from "@/components/Amount";
 
-function fromPrice(category: (typeof catalog.categories)[number]) {
+function fromPrice(category: CatalogCategory) {
   const fixedPrices = category.items
     .filter((item) => !item.isAddon && item.pricing.mode === "fixed")
     .map((item) => item.pricing as { mode: "fixed"; thb: number; usd: number | null });
@@ -22,13 +22,13 @@ export default function ServicesSection() {
             Every service, in one place.
           </h2>
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-charcoal">
-            Twelve service lines, each priced by the day, month, or year.
-            Pick one to see tiers and add-on services.
+            Priced by the day, month, or year. Pick a service to see tiers
+            and add-on options.
           </p>
         </Reveal>
 
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {catalog.categories.map((category, i) => {
+          {getVisibleCategories().map((category, i) => {
             const cheapest = fromPrice(category);
             return (
               <Reveal key={category.slug} delay={i * 40}>

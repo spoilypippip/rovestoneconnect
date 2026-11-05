@@ -33,6 +33,7 @@ function getDb(): DatabaseSync {
       total_thb INTEGER NOT NULL,
       currency TEXT NOT NULL DEFAULT 'THB',
       total_usd REAL,
+      total_eur REAL,
       status TEXT NOT NULL,
       payment_provider TEXT NOT NULL
     )
@@ -42,6 +43,7 @@ function getDb(): DatabaseSync {
   for (const stmt of [
     `ALTER TABLE orders ADD COLUMN currency TEXT NOT NULL DEFAULT 'THB'`,
     `ALTER TABLE orders ADD COLUMN total_usd REAL`,
+    `ALTER TABLE orders ADD COLUMN total_eur REAL`,
   ]) {
     try {
       db.exec(stmt);
@@ -67,6 +69,7 @@ function rowToOrder(row: Record<string, unknown>): Order {
     totalThb: row.total_thb as number,
     currency: (row.currency as Order["currency"]) ?? "THB",
     totalUsd: (row.total_usd as number | null) ?? null,
+    totalEur: (row.total_eur as number | null) ?? null,
     status: row.status as OrderStatus,
     paymentProvider: row.payment_provider as string,
   };
@@ -82,6 +85,7 @@ export class SqliteOrderStore implements OrderStore {
       totalThb: input.totalThb,
       currency: input.currency,
       totalUsd: input.totalUsd,
+      totalEur: input.totalEur,
       status: "pending_payment",
       paymentProvider: input.paymentProvider,
     };
@@ -89,8 +93,8 @@ export class SqliteOrderStore implements OrderStore {
     getDb()
       .prepare(
         `INSERT INTO orders
-          (id, created_at, customer_name, customer_company, customer_email, customer_phone, preferred_language, items_json, total_thb, currency, total_usd, status, payment_provider)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          (id, created_at, customer_name, customer_company, customer_email, customer_phone, preferred_language, items_json, total_thb, currency, total_usd, total_eur, status, payment_provider)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       )
       .run(
         order.id,
@@ -104,6 +108,7 @@ export class SqliteOrderStore implements OrderStore {
         order.totalThb,
         order.currency,
         order.totalUsd,
+        order.totalEur,
         order.status,
         order.paymentProvider,
       );

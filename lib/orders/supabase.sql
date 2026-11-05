@@ -42,3 +42,15 @@ create index if not exists order_items_order_id_idx on order_items (order_id);
 alter table orders add column if not exists currency text not null default 'THB' check (currency in ('THB', 'USD'));
 alter table orders add column if not exists total_usd numeric;
 alter table order_items add column if not exists unit_price_usd numeric;
+
+-- Adds real EUR checkout alongside USD. EUR has no stored per-item catalog
+-- price - it's derived from the THB price via a placeholder conversion
+-- rate (see PLACEHOLDER_THB_PER_EUR in lib/currency.ts) at order-creation
+-- time, then frozen here like unit_price_usd/total_usd already are.
+-- `add column if not exists` is a no-op if this has already been run, but
+-- the currency CHECK constraint needs a real drop+recreate to widen since
+-- the column already exists on this table.
+alter table orders add column if not exists total_eur numeric;
+alter table order_items add column if not exists unit_price_eur numeric;
+alter table orders drop constraint if exists orders_currency_check;
+alter table orders add constraint orders_currency_check check (currency in ('THB', 'USD', 'EUR'));

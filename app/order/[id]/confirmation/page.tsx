@@ -71,6 +71,7 @@ export default async function OrderConfirmationPage({
                   order.currency,
                   item.unitPriceThb * item.qty,
                   item.unitPriceUsd != null ? item.unitPriceUsd * item.qty : null,
+                  item.unitPriceEur != null ? item.unitPriceEur * item.qty : null,
                 )}
               </span>
             </div>
@@ -78,7 +79,7 @@ export default async function OrderConfirmationPage({
           <div className="flex items-baseline justify-between gap-4 py-4">
             <span className="text-sm text-ink">Total</span>
             <span className="text-base text-ink">
-              {formatCharged(order.currency, order.totalThb, order.totalUsd)}
+              {formatCharged(order.currency, order.totalThb, order.totalUsd, order.totalEur)}
             </span>
           </div>
         </div>

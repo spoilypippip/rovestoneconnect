@@ -35,7 +35,7 @@ export class LineNotificationProvider implements NotificationProvider {
   async notifyNewOrder(order: Order): Promise<void> {
     const itemNames = order.items.map((item) => `${item.name} x${item.qty}`).join(", ");
     await push(
-      `New order: ${order.id}\nStatus: ${order.status}\nCustomer: ${order.customer.name} (${order.customer.phone})\nTotal: ${formatCharged(order.currency, order.totalThb, order.totalUsd)}\nItems: ${itemNames}`,
+      `New order: ${order.id}\nStatus: ${order.status}\nCustomer: ${order.customer.name} (${order.customer.phone})\nTotal: ${formatCharged(order.currency, order.totalThb, order.totalUsd, order.totalEur)}\nItems: ${itemNames}`,
     );
   }
 

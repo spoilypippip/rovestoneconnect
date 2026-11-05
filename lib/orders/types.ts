@@ -15,6 +15,7 @@ export type OrderItem = {
   name: string;
   unitPriceThb: number;
   unitPriceUsd: number | null;
+  unitPriceEur: number | null;
   qty: number;
 };
 
@@ -32,10 +33,12 @@ export type Order = {
   customer: OrderCustomer;
   items: OrderItem[];
   totalThb: number;
-  // The currency actually charged - null totalUsd means this order predates
-  // USD checkout (or one of its items had no USD price at order time).
+  // The currency actually charged - null totalUsd/totalEur means this order
+  // predates that currency's checkout (or one of its items had no price in
+  // it at order time).
   currency: Currency;
   totalUsd: number | null;
+  totalEur: number | null;
   status: OrderStatus;
   paymentProvider: string;
 };
@@ -46,6 +49,7 @@ export type NewOrderInput = {
   totalThb: number;
   currency: Currency;
   totalUsd: number | null;
+  totalEur: number | null;
   paymentProvider: string;
 };
 

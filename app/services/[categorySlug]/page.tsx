@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Container from "@/components/Container";
 import Reveal from "@/components/Reveal";
 import TierCard from "@/components/TierCard";
-import { catalog, getCategory } from "@/content/catalog";
+import { getCategory, getVisibleCategories } from "@/content/catalog";
 import { categoryCopy } from "@/content/catalog-copy";
 
 export function generateStaticParams() {
-  return catalog.categories.map((category) => ({ categorySlug: category.slug }));
+  return getVisibleCategories().map((category) => ({ categorySlug: category.slug }));
 }
 
 export async function generateMetadata({
@@ -18,7 +18,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { categorySlug } = await params;
   const category = getCategory(categorySlug);
-  if (!category) return {};
+  if (!category || category.visibility !== "active") return {};
 
   return {
     title: `${category.name} | RoveStone Connect`,
@@ -34,6 +34,9 @@ export default async function CategoryPage({
   const { categorySlug } = await params;
   const category = getCategory(categorySlug);
   if (!category) notFound();
+  // Temporarily paused for self-checkout (see content/catalog.ts) - the
+  // data/pricing stays intact, just not reachable via a direct link/bookmark.
+  if (category.visibility !== "active") redirect("/services");
 
   const coreTiers = category.items.filter((item) => !item.isAddon);
   const addons = category.items.filter((item) => item.isAddon);
