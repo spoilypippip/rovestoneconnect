@@ -20,13 +20,15 @@ export default function QuoteRequestForm({
 
     const form = new FormData(e.currentTarget);
     const result = await submitQuoteRequest({
+      // itemName is display only - the server reads the real name from the
+      // catalog using this id.
       itemId,
-      itemName,
       name: String(form.get("name") ?? ""),
       company: String(form.get("company") ?? ""),
       email: String(form.get("email") ?? ""),
       phone: String(form.get("phone") ?? ""),
       message: String(form.get("message") ?? ""),
+      website: String(form.get("website") ?? ""),
     });
 
     if (!result.ok) {
@@ -75,6 +77,14 @@ export default function QuoteRequestForm({
           rows={5}
           className="mt-2 w-full border border-line bg-paper px-4 py-3 text-sm text-ink focus-visible:outline-2 focus-visible:outline-brass"
         />
+      </div>
+
+      {/* Honeypot: hidden from people (and from screen readers and the tab
+          order), filled in by bots that complete every field they find.
+          A filled value makes the server drop the submission. */}
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
       <button
