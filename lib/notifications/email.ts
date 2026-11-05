@@ -1,39 +1,85 @@
 import type { Order } from "@/lib/orders/types";
-import type { NotificationProvider, QuoteRequestDetails } from "./types";
+import type {
+  ContactMessageDetails,
+  NotificationProvider,
+  NotificationResult,
+  QuoteRequestDetails,
+} from "./types";
 import { formatCharged } from "@/lib/currency";
 
+// What kind of alert a log line is about. Safe to log anywhere: it says
+// nothing about the person the alert concerns.
+type NotificationKind = "new-order" | "quote-request" | "contact-message";
+
+/**
+ * Every notification body here contains the customer's name, email, and
+ * phone number. In production that must not reach the server log - on
+ * Vercel those lines are retained and readable by anyone with project
+ * access. Locally the full text is exactly what you want to see, since
+ * nothing is being delivered.
+ */
+function reportUnconfigured(kind: NotificationKind, ref: string, subject: string, text: string) {
+  const missing = "RESEND_API_KEY/NOTIFICATION_EMAIL_FROM/NOTIFICATION_EMAIL_TO";
+
+  if (process.env.NODE_ENV === "production") {
+    console.error(
+      `[notifications] Email not configured (missing ${missing}). Dropped ${kind} ${ref} unsent; contents withheld because they contain personal data.`,
+    );
+    return;
+  }
+
+  console.warn(
+    `[notifications] Email not configured (missing ${missing}). Would have sent ${kind} ${ref}: "${subject}"\n${text}`,
+  );
+}
+
 // TODO: set RESEND_API_KEY, NOTIFICATION_EMAIL_FROM, and
-// NOTIFICATION_EMAIL_TO before launch. Until then this logs to the
-// server console instead of sending, so checkout and quote requests
-// never fail just because email isn't configured yet.
-async function send(subject: string, text: string) {
+// NOTIFICATION_EMAIL_TO before launch. Until they are set nothing is
+// delivered, and this says so in its return value rather than failing
+// silently - the contact form shows the customer an error instead of a
+// false "thank you".
+async function send(
+  kind: NotificationKind,
+  ref: string,
+  subject: string,
+  text: string,
+): Promise<NotificationResult> {
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.NOTIFICATION_EMAIL_FROM;
   const to = process.env.NOTIFICATION_EMAIL_TO;
 
   if (!apiKey || !from || !to) {
-    console.warn(
-      `[notifications] Email not configured (missing RESEND_API_KEY/NOTIFICATION_EMAIL_FROM/NOTIFICATION_EMAIL_TO). Would have sent: "${subject}"\n${text}`,
-    );
-    return;
+    reportUnconfigured(kind, ref, subject, text);
+    return { ok: false, reason: "not-configured" };
   }
 
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ from, to, subject, text }),
-  });
+  let res: Response;
+  try {
+    res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ from, to, subject, text }),
+    });
+  } catch (error) {
+    console.error(`[notifications] Resend request for ${kind} ${ref} failed: ${(error as Error).message}`);
+    return { ok: false, reason: "delivery-failed" };
+  }
 
   if (!res.ok) {
-    console.error(`[notifications] Resend request failed: ${res.status} ${await res.text()}`);
+    console.error(
+      `[notifications] Resend request for ${kind} ${ref} failed: ${res.status} ${await res.text()}`,
+    );
+    return { ok: false, reason: "delivery-failed" };
   }
+
+  return { ok: true };
 }
 
 export class EmailNotificationProvider implements NotificationProvider {
-  async notifyNewOrder(order: Order): Promise<void> {
+  async notifyNewOrder(order: Order): Promise<NotificationResult> {
     const itemLines = order.items
       .map(
         (item) =>
@@ -41,7 +87,9 @@ export class EmailNotificationProvider implements NotificationProvider {
       )
       .join("\n");
 
-    await send(
+    return send(
+      "new-order",
+      order.id,
       `New order ${order.status === "pending_verification" ? "awaiting verification" : "created"}: ${order.id}`,
       [
         `Order: ${order.id}`,
@@ -57,12 +105,34 @@ export class EmailNotificationProvider implements NotificationProvider {
     );
   }
 
-  async notifyQuoteRequest(details: QuoteRequestDetails): Promise<void> {
-    await send(
+  async notifyQuoteRequest(details: QuoteRequestDetails): Promise<NotificationResult> {
+    return send(
+      "quote-request",
+      crypto.randomUUID(),
       `New quote request${details.itemName ? `: ${details.itemName}` : ""}`,
       [
         details.itemName ? `Service: ${details.itemName} (${details.itemId})` : "Service: not specified",
         `From: ${details.name} <${details.email}>, ${details.phone}`,
+        details.company ? `Company: ${details.company}` : null,
+        "Message:",
+        details.message,
+      ]
+        .filter(Boolean)
+        .join("\n"),
+    );
+  }
+
+  async notifyContactMessage(details: ContactMessageDetails): Promise<NotificationResult> {
+    return send(
+      "contact-message",
+      crypto.randomUUID(),
+      `New consultation request${details.serviceName ? `: ${details.serviceName}` : ""}`,
+      [
+        details.serviceName
+          ? `Service: ${details.serviceName} (${details.serviceSlug})`
+          : "Service: not specified",
+        `From: ${details.name} <${details.email}>`,
+        details.phone ? `Phone: ${details.phone}` : null,
         details.company ? `Company: ${details.company}` : null,
         "Message:",
         details.message,
