@@ -161,7 +161,9 @@ export const footerLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
+// TODO: add a `phone` here (and render it) once there is a real number to
+// publish - the placeholder that used to sit here was shown to customers in
+// the footer as if it were a working line.
 export const contactInfo = {
   email: "connect@rovestone.co",
-  phone: "+66 2 000 0000",
 };
